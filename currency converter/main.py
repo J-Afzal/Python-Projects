@@ -1,6 +1,5 @@
 import tkinter
 import tkinter.ttk
-import tkinter.messagebox
 import datetime
 import forex_python.converter
 # forexData contains all the offline forex data in order to stop the use of the
@@ -233,7 +232,6 @@ if __name__ == "__main__":
     root.geometry(f"1012x258+{int(root.winfo_screenwidth()/2-1012/2)}+{int(root.winfo_screenheight()/2-258/2)}")
     root.resizable(width=False, height=False)
     root.iconphoto(True, tkinter.PhotoImage(file="currency converter\\resources\\app.png"))
-
     root.tk.call("source", "themes\\sun-valley.tcl")
     root.tk.call("set_theme", "dark")
 
