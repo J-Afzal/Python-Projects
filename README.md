@@ -1,5 +1,42 @@
 # Project List
-* Currency Converter
+* Text Editor (using Curses)
+* Chess (using Pygame)
+* Snake (using Pygame)
+* Reddit Scraper (using Kivy)
+* YouTube Downloader (using Kivy)
+* Media Player (using PyQt)
+* File Explorer (using PyQt)
+* Calculator (using Tkinter)
+* Currency Converter (using Tkinter)
+
+# Text Editor
+
+# Chess
+
+# Snake
+
+# Reddit Scraper
+
+# YouTube Downloader
+
+# Media Player
+
+# File Explorer
+
+# Calculator
+<h3 align="center">
+  The main window
+</h3>
+<p align="center">
+  <img src="screenshots\calculator.png">
+</p>
+
+<h3 align="center">
+  The info window
+</h3>
+<p align="center">
+  <img src="screenshots\calculator info.png">
+</p>
 
 # Currency Converter
 <h3 align="center">
