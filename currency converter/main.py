@@ -143,7 +143,7 @@ def updateForexData(event=None):
 
 
 # Keyboard shortcuts and general information that may be useful to the user
-def displayInfoPopUp(event=None):
+def displayInfoWindow(event=None):
     root.withdraw()
     global infoWindow
     infoWindow = tkinter.Toplevel(root)
@@ -152,16 +152,20 @@ def displayInfoPopUp(event=None):
     infoWindow.resizable(width=False, height=False)
     infoWindow.overrideredirect(True)
     infoWindow.protocol("WM_DELETE_WINDOW", nothing)
+    infoWindow.focus_force()
+
+    infoWindow.bind("<Return>", quitInfoWindow)
+    infoWindow.bind("<Control-q>", quitInfoWindow)
 
     mainFrame = tkinter.ttk.Frame(infoWindow, padding=framePadding)
     mainFrame.grid(column=0, row=0)
 
     tkinter.ttk.Label(mainFrame,
                       text="""Keyboard Shortcuts
-CTRL + E    Move focus to amount entry
+CTRL + E    Move cursor focus to amount entry field
 CTRL + S    Swap currencies
 CTRL + U    Update forex rates
-CTRL + I    Show info pop up
+CTRL + I    Show info window
 CTRL + C    Copy conversion result to the clipboard
 CTRL + Q    Close window
 
@@ -191,19 +195,23 @@ process can take up to a minute or two.""",
     infoWindow.mainloop()
 
 
-def quitInfoWindow():
+def quitInfoWindow(event=None):
     infoWindow.destroy()
     root.deiconify()
 
 
 # Copies the converted result
-def copyToClipboard(event=None):
+def copyOutputToClipboard(event=None):
     root.clipboard_clear()
     root.clipboard_append(resultTwo.get())
 
 
 def nothing():
     pass
+
+
+def quitMainWindow(event=None):
+    root.quit()
 
 
 if __name__ == "__main__":
@@ -255,9 +263,9 @@ if __name__ == "__main__":
     root.bind("<Control-e>", focusOnEntry)
     root.bind("<Control-s>", swapCurrencies)
     root.bind("<Control-u>", updateForexData)
-    root.bind("<Control-i>", displayInfoPopUp)
-    root.bind("<Control-c>", copyToClipboard)
-    root.bind("<Control-q>", root.quit)
+    root.bind("<Control-i>", displayInfoWindow)
+    root.bind("<Control-c>", copyOutputToClipboard)
+    root.bind("<Control-q>", quitMainWindow)
 
     InputFrame = tkinter.ttk.Frame(root, padding=framePadding)
     InputFrame.grid(column=0, row=0)
@@ -322,9 +330,9 @@ if __name__ == "__main__":
                        command=updateForexData).grid(column=0, row=0, padx=buttonsPadding)
     tkinter.ttk.Button(bottomFrame,
                        image=infoButtonImg,
-                       command=displayInfoPopUp).grid(column=1, row=0, padx=buttonsPadding)
+                       command=displayInfoWindow).grid(column=1, row=0, padx=buttonsPadding)
     tkinter.ttk.Button(bottomFrame,
                        image=copyButtonImg,
-                       command=copyToClipboard).grid(column=2, row=0, padx=buttonsPadding)
+                       command=copyOutputToClipboard).grid(column=2, row=0, padx=buttonsPadding)
 
     root.mainloop()
