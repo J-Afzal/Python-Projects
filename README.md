@@ -14,6 +14,24 @@
 # Chess
 
 # Snake
+<h3 align="center">
+  The main menu
+</h3>
+<p align="center">
+  <img src="screenshots\snake main menu.png">
+</p>
+<h3 align="center">
+  The game window
+</h3>
+<p align="center">
+  <img src="screenshots\snake game.png">
+</p>
+<h3 align="center">
+  The full game
+</h3>
+<p align="center">
+  <img src="screenshots\snake game over.png">
+</p>
 
 # Reddit Scraper
 
@@ -30,7 +48,6 @@
 <p align="center">
   <img src="screenshots\calculator.png">
 </p>
-
 <h3 align="center">
   The info window
 </h3>
@@ -45,14 +62,12 @@
 <p align="center">
   <img src="screenshots\currency converter.png">
 </p>
-
 <h3 align="center">
   The info window
 </h3>
 <p align="center">
   <img src="screenshots\currency converter info.png">
 </p>
-
 <h3 align="center">
   The update window
 </h3>
