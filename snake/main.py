@@ -477,7 +477,7 @@ if __name__ == "__main__":
 
     pygame.init()
     pygame.display.set_caption("Snake")
-    pygame.display.set_icon(pygame.image.load("snake\\resources\\app.png"))
+    pygame.display.set_icon(pygame.image.load("snake\\resources\\app.ico"))
     window = pygame.display.set_mode((windowWidth, windowHeight))
     clock = pygame.time.Clock()
 
