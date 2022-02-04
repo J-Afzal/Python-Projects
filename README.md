@@ -18,19 +18,19 @@
   The main menu
 </h3>
 <p align="center">
-  <img src="screenshots\snake main menu.png">
+  <img src="snake/screenshots/snake main menu.png">
 </p>
 <h3 align="center">
   The game window
 </h3>
 <p align="center">
-  <img src="screenshots\snake game.png">
+  <img src="snake/screenshots/snake game.png">
 </p>
 <h3 align="center">
   The full game
 </h3>
 <p align="center">
-  <img src="screenshots\snake game over.png">
+  <img src="snake/screenshots/snake game over.png">
 </p>
 
 # Reddit Scraper
@@ -46,13 +46,13 @@
   The main window
 </h3>
 <p align="center">
-  <img src="screenshots\calculator.png">
+  <img src="calculator/screenshots/calculator.png">
 </p>
 <h3 align="center">
   The info window
 </h3>
 <p align="center">
-  <img src="screenshots\calculator info.png">
+  <img src="calculator/screenshots/calculator info.png">
 </p>
 
 # Currency Converter
@@ -60,17 +60,17 @@
   The main window
 </h3>
 <p align="center">
-  <img src="screenshots\currency converter.png">
+  <img src="currency converter/screenshots/currency converter.png">
 </p>
 <h3 align="center">
   The info window
 </h3>
 <p align="center">
-  <img src="screenshots\currency converter info.png">
+  <img src="currency converter/screenshots/currency converter info.png">
 </p>
 <h3 align="center">
   The update window
 </h3>
 <p align="center">
-  <img src="screenshots\currency converter update.png">
+  <img src="currency converter/screenshots/currency converter update.png">
 </p>
