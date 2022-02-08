@@ -12,25 +12,61 @@
 # Text Editor
 
 # Chess
+<h3 align="center">
+  Main Menu
+</h3>
+<p align="center">
+  <img src="chess/screenshots/main menu.png">
+</p>
+<h3 align="center">
+  Game Window
+</h3>
+<p align="center">
+  <img src="chess/screenshots/game window.png">
+</p>
+<h3 align="center">
+  Game Window During Pawn Promotion
+</h3>
+<p align="center">
+  <img src="chess/screenshots/game window pawn promotion.png">
+</p>
+<h3 align="center">
+  Game Over
+</h3>
+<p align="center">
+  <img src="chess/screenshots/game over.png">
+</p>
+<h3 align="center">
+  Info Window
+</h3>
+<p align="center">
+  <img src="chess/screenshots/info window.png">
+</p>
 
 # Snake
 <h3 align="center">
-  The main menu
+  Main Menu
 </h3>
 <p align="center">
-  <img src="snake/screenshots/snake main menu.png">
+  <img src="snake/screenshots/main menu.png">
 </p>
 <h3 align="center">
-  The game window
+  Game Window
 </h3>
 <p align="center">
-  <img src="snake/screenshots/snake game.png">
+  <img src="snake/screenshots/game window.png">
 </p>
 <h3 align="center">
-  The full game
+  Game Over
 </h3>
 <p align="center">
-  <img src="snake/screenshots/snake game over.png">
+  <img src="snake/screenshots/game over.png">
+</p>
+<h3 align="center">
+  Info Window
+</h3>
+<p align="center">
+  <img src="snake/screenshots/info window.png">
 </p>
 
 # Reddit Scraper
@@ -43,34 +79,34 @@
 
 # Calculator
 <h3 align="center">
-  The main window
+  Main Window
 </h3>
 <p align="center">
-  <img src="calculator/screenshots/calculator.png">
+  <img src="calculator/screenshots/main window.png">
 </p>
 <h3 align="center">
-  The info window
+  Info Window
 </h3>
 <p align="center">
-  <img src="calculator/screenshots/calculator info.png">
+  <img src="calculator/screenshots/info window.png">
 </p>
 
 # Currency Converter
 <h3 align="center">
-  The main window
+  Main Window
 </h3>
 <p align="center">
-  <img src="currency converter/screenshots/currency converter.png">
+  <img src="currency converter/screenshots/main window.png">
 </p>
 <h3 align="center">
-  The info window
+  Info Window
 </h3>
 <p align="center">
-  <img src="currency converter/screenshots/currency converter info.png">
+  <img src="currency converter/screenshots/info window.png">
 </p>
 <h3 align="center">
-  The update window
+  Update Window
 </h3>
 <p align="center">
-  <img src="currency converter/screenshots/currency converter update.png">
+  <img src="currency converter/screenshots/update window.png">
 </p>
