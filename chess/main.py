@@ -67,11 +67,13 @@ def createInfoMenu():
     lineTwo = "USE THE MOUSE TO DRAG AND DROP PIECES"
     lineThree = "ALL LEGAL MOVES ARE SHOWN FOR A SELECTED PIECE"
     lineFour = "ALL CHESS RULES ENFORCED VIA python-chess LIBRARY"
-    lineFive = "R = RESTART WHEN GAMER OVER"
-    lineSix = "Q = QUIT TO MAIN MENU"
-    lineSeven = "CTRL + Q = QUIT PROGRAM"
-    lineEight = "BACK TO MAIN MENU"
-# hold down h to hide game over menu and add to info screen
+    lineFive = "ESC = GO BACK IN MENUS"
+    lineSix = "H = HIDE GAME OVER MESSAGE"
+    lineSeven = "R = RESTART WHEN GAMER OVER"
+    lineEight = "Q = QUIT TO MAIN MENU"
+    lineNine = "CTRL + Q = QUIT PROGRAM"
+    lineTen = "BACK TO MAIN MENU"
+
     infoMenu = pygame.Surface((windowSize, windowSize))
     infoMenu.fill(menuWindowBg)
     infoMenu.blit(fontOne.render(lineOne, True, textColour), (50, 50))
@@ -81,7 +83,9 @@ def createInfoMenu():
     infoMenu.blit(fontTwo.render(lineFive, True, textColour), (50, 300))
     infoMenu.blit(fontTwo.render(lineSix, True, textColour), (50, 350))
     infoMenu.blit(fontTwo.render(lineSeven, True, textColour), (50, 400))
-    infoMenu.blit(fontThree.render(lineEight, True, selectedTextColour), (50, 550))
+    infoMenu.blit(fontTwo.render(lineEight, True, textColour), (50, 450))
+    infoMenu.blit(fontTwo.render(lineNine, True, textColour), (50, 500))
+    infoMenu.blit(fontThree.render(lineTen, True, selectedTextColour), (50, 550))
 
     return infoMenu
 
@@ -94,7 +98,7 @@ def createGameOverMenu():
 
     one = pygame.Surface((gameOverWidth, gameOverHeight))
     one.fill(menuWindowBg)
-    one.blit(rematchTextSelected, rematchText.get_rect(center=(gameOverWidth/2, gameOverHeight-85)))
+    one.blit(rematchTextSelected, rematchTextSelected.get_rect(center=(gameOverWidth/2, gameOverHeight-85)))
     one.blit(quitText, quitText.get_rect(center=(gameOverWidth/2, gameOverHeight-35)))
     one.blit(piecePNGs["K"], (gameOverWidth/2-piecesSize-50, 0))
     one.blit(piecePNGs["k"], (gameOverWidth/2+50, 0))
@@ -102,138 +106,11 @@ def createGameOverMenu():
     two = pygame.Surface((gameOverWidth, gameOverHeight))
     two.fill(menuWindowBg)
     two.blit(rematchText, rematchText.get_rect(center=(gameOverWidth/2, gameOverHeight-85)))
-    two.blit(quitTextSelected, quitText.get_rect(center=(gameOverWidth/2, gameOverHeight-35)))
+    two.blit(quitTextSelected, quitTextSelected.get_rect(center=(gameOverWidth/2, gameOverHeight-35)))
     two.blit(piecePNGs["K"], (gameOverWidth/2-piecesSize-50, 0))
     two.blit(piecePNGs["k"], (gameOverWidth/2+50, 0))
 
     return [one, two]
-
-
-def getSelectedPieceAndPosition():
-    pieceGridPosition = getGridPositionFromCoords(pygame.mouse.get_pos())
-    piece = chessBoard.piece_at(pieceGridPosition)
-    if piece == None:
-        pieceSymbol = None
-    else:
-        if piece.color == chessBoard.turn:
-            pieceSymbol = piece.symbol()
-        else:
-            pieceSymbol = None
-
-    return pieceSymbol, pieceGridPosition,
-
-
-def executeNextMove():
-    newGridPosition = getGridPositionFromCoords(pygame.mouse.get_pos())
-
-    try:
-        chessBoard.find_move(selectedPieceGridPosition, newGridPosition)
-    except ValueError:  # Illegal move
-        return False
-
-    if (selectedPiece == "P" and int(newGridPosition / 8) == 7) or (selectedPiece == "p" and int(newGridPosition / 8) == 0):
-        chessBoard.push(chess.Move(selectedPieceGridPosition, newGridPosition, getPawnPromotionChoice(newGridPosition)))
-    else:
-        chessBoard.push(chess.Move(selectedPieceGridPosition, newGridPosition))
-
-    global previousMovesFrom, previousMovesTo, previousMovePiece
-    previousMovesFrom.append(selectedPieceGridPosition)
-    previousMovesTo.append(newGridPosition)
-    previousMovePiece = chessBoard.piece_at(previousMovesTo[-1]).symbol()
-
-    return True
-
-
-def getPawnPromotionChoice(newGridPosition):
-    x = squareSize * (newGridPosition % 8) + piecePadding
-    if chessBoard.turn == chess.WHITE:
-        pygame.draw.rect(window, pawnPromotionBg, (x - piecePadding, windowSize - squareSize*4, squareSize, squareSize*4))
-        window.blit(piecePNGs["Q"], (x, windowSize + piecePadding - squareSize * 1))
-        window.blit(piecePNGs["N"], (x, windowSize + piecePadding - squareSize * 2))
-        window.blit(piecePNGs["R"], (x, windowSize + piecePadding - squareSize * 3))
-        window.blit(piecePNGs["B"], (x, windowSize + piecePadding - squareSize * 4))
-    else:
-        pygame.draw.rect(window, pawnPromotionBg, (x - piecePadding, 0, squareSize, squareSize*4))
-        window.blit(piecePNGs["q"], (x, piecePadding + squareSize * 0))
-        window.blit(piecePNGs["n"], (x, piecePadding + squareSize * 1))
-        window.blit(piecePNGs["r"], (x, piecePadding + squareSize * 2))
-        window.blit(piecePNGs["b"], (x, piecePadding + squareSize * 3))
-
-    pygame.display.update()
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.display.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
-                    pygame.display.quit()
-                    sys.exit()
-            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-                x = int(pygame.mouse.get_pos()[0] / squareSize)
-                y = int(pygame.mouse.get_pos()[1] / squareSize)
-                if x == (newGridPosition % 8):
-                    if chessBoard.turn == chess.WHITE:
-                        if y == 7:
-                            return chess.QUEEN
-                        elif y == 6:
-                            return chess.KNIGHT
-                        elif y == 5:
-                            return chess.ROOK
-                        elif y == 4:
-                            return chess.BISHOP
-                    else:
-                        if y == 0:
-                            return chess.QUEEN
-                        elif y == 1:
-                            return chess.KNIGHT
-                        elif y == 2:
-                            return chess.ROOK
-                        elif y == 3:
-                            return chess.BISHOP
-
-
-def undoMove():
-    global previousMovesFrom, previousMovesTo, previousMovePiece
-
-    try:
-        chessBoard.pop()
-        previousMovesFrom.pop()
-        previousMovesTo.pop()
-        previousMovePiece = chessBoard.piece_at(previousMovesTo[-1]).symbol()
-    except IndexError:  # No moves to undo
-        pass
-
-
-def displayBoard():
-    window.blit(blankBoard, (0, 0))
-    for i in range(64):
-        if chessBoard.piece_at(i) != None:
-            window.blit(piecePNGs[chessBoard.piece_at(i).symbol()], getCoordsFromGridPosition(i, piecePadding))
-
-    if previousMovesFrom and previousMovesTo:
-        pygame.draw.rect(window, previousMoveFromColour, getRectFromGridPosition(previousMovesFrom[-1]))
-        pygame.draw.rect(window, previousMoveToColour, getRectFromGridPosition(previousMovesTo[-1]))
-        window.blit(piecePNGs[previousMovePiece], getCoordsFromGridPosition(previousMovesTo[-1], piecePadding))
-
-    if chessBoard.is_check():
-        kingLocation = chessBoard.king(chessBoard.turn)
-        pygame.draw.rect(window, kingInCheckColour, getRectFromGridPosition(kingLocation))
-        window.blit(piecePNGs[chessBoard.piece_at(kingLocation).symbol()], getCoordsFromGridPosition(kingLocation, piecePadding))
-
-    if mouseButtonDown and selectedPiece != None:
-        pygame.draw.rect(window, pieceSelectedColour, getRectFromGridPosition(selectedPieceGridPosition))
-        tempSurface = pygame.Surface((windowSize, windowSize), pygame.SRCALPHA)
-        for move in list(chessBoard.legal_moves):
-            if move.from_square == selectedPieceGridPosition:
-                if (chessBoard.color_at(move.to_square) == chess.BLACK and chessBoard.turn == chess.WHITE) or (chessBoard.color_at(move.to_square) == chess.WHITE and chessBoard.turn == chess.BLACK):
-                    pygame.draw.circle(tempSurface, legalMoveCaptureColour, getCoordsFromGridPosition(move.to_square, squareSize/2), legalMoveCaptureRadius, legalMoveCaptureWidth)
-                else:
-                    pygame.draw.circle(tempSurface, legalMoveColour, getCoordsFromGridPosition(move.to_square, squareSize/2), legalMoveRadius)
-        window.blit(tempSurface, (0, 0))
-        mousePos = pygame.mouse.get_pos()
-        window.blit(piecePNGs[selectedPiece], (mousePos[0]-piecesSize/2, mousePos[1]-piecesSize/2))
 
 
 def displayMainMenu():
@@ -368,7 +245,6 @@ def displayGameOverMenu():
         blackScore += 1
 
     score = pygame.font.SysFont(mainFont, 72).render(f"{whiteScore}-{blackScore}", True, textColour)
-    hideMenu = False
     currentSelection = 0
     while True:
         for event in pygame.event.get():
@@ -414,6 +290,133 @@ def displayGameOverMenu():
             displayBoard()
 
         pygame.display.update()
+
+
+def getSelectedPieceAndPosition():
+    pieceGridPosition = getGridPositionFromCoords(pygame.mouse.get_pos())
+    piece = chessBoard.piece_at(pieceGridPosition)
+    if piece == None:
+        pieceSymbol = None
+    else:
+        if piece.color == chessBoard.turn:
+            pieceSymbol = piece.symbol()
+        else:
+            pieceSymbol = None
+
+    return pieceSymbol, pieceGridPosition,
+
+
+def executeNextMove():
+    newGridPosition = getGridPositionFromCoords(pygame.mouse.get_pos())
+
+    try:
+        chessBoard.find_move(selectedPieceGridPosition, newGridPosition)
+    except ValueError:  # Illegal move
+        return False
+
+    if (selectedPiece == "P" and int(newGridPosition / 8) == 7) or (selectedPiece == "p" and int(newGridPosition / 8) == 0):
+        chessBoard.push(chess.Move(selectedPieceGridPosition, newGridPosition, getPawnPromotionChoice(newGridPosition)))
+    else:
+        chessBoard.push(chess.Move(selectedPieceGridPosition, newGridPosition))
+
+    global previousMovesFrom, previousMovesTo, previousMovePiece
+    previousMovesFrom.append(selectedPieceGridPosition)
+    previousMovesTo.append(newGridPosition)
+    previousMovePiece = chessBoard.piece_at(previousMovesTo[-1]).symbol()
+
+    return True
+
+
+def getPawnPromotionChoice(newGridPosition):
+    x = squareSize * (newGridPosition % 8) + piecePadding
+    if chessBoard.turn == chess.WHITE:
+        pygame.draw.rect(window, pawnPromotionBg, (x - piecePadding, windowSize - squareSize*4, squareSize, squareSize*4))
+        window.blit(piecePNGs["Q"], (x, windowSize + piecePadding - squareSize * 1))
+        window.blit(piecePNGs["N"], (x, windowSize + piecePadding - squareSize * 2))
+        window.blit(piecePNGs["R"], (x, windowSize + piecePadding - squareSize * 3))
+        window.blit(piecePNGs["B"], (x, windowSize + piecePadding - squareSize * 4))
+    else:
+        pygame.draw.rect(window, pawnPromotionBg, (x - piecePadding, 0, squareSize, squareSize*4))
+        window.blit(piecePNGs["q"], (x, piecePadding + squareSize * 0))
+        window.blit(piecePNGs["n"], (x, piecePadding + squareSize * 1))
+        window.blit(piecePNGs["r"], (x, piecePadding + squareSize * 2))
+        window.blit(piecePNGs["b"], (x, piecePadding + squareSize * 3))
+
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                    pygame.display.quit()
+                    sys.exit()
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                x = int(pygame.mouse.get_pos()[0] / squareSize)
+                y = int(pygame.mouse.get_pos()[1] / squareSize)
+                if x == (newGridPosition % 8):
+                    if chessBoard.turn == chess.WHITE:
+                        if y == 7:
+                            return chess.QUEEN
+                        elif y == 6:
+                            return chess.KNIGHT
+                        elif y == 5:
+                            return chess.ROOK
+                        elif y == 4:
+                            return chess.BISHOP
+                    else:
+                        if y == 0:
+                            return chess.QUEEN
+                        elif y == 1:
+                            return chess.KNIGHT
+                        elif y == 2:
+                            return chess.ROOK
+                        elif y == 3:
+                            return chess.BISHOP
+
+
+def undoMove():
+    global previousMovesFrom, previousMovesTo, previousMovePiece
+
+    try:
+        chessBoard.pop()
+        previousMovesFrom.pop()
+        previousMovesTo.pop()
+        previousMovePiece = chessBoard.piece_at(previousMovesTo[-1]).symbol()
+    except IndexError:  # No moves to undo
+        pass
+
+
+def displayBoard():
+    window.blit(blankBoard, (0, 0))
+    for i in range(64):
+        if chessBoard.piece_at(i) != None:
+            window.blit(piecePNGs[chessBoard.piece_at(i).symbol()], getCoordsFromGridPosition(i, piecePadding))
+
+    if previousMovesFrom and previousMovesTo:
+        pygame.draw.rect(window, previousMoveFromColour, getRectFromGridPosition(previousMovesFrom[-1]))
+        pygame.draw.rect(window, previousMoveToColour, getRectFromGridPosition(previousMovesTo[-1]))
+        window.blit(piecePNGs[previousMovePiece], getCoordsFromGridPosition(previousMovesTo[-1], piecePadding))
+
+    if chessBoard.is_check():
+        kingLocation = chessBoard.king(chessBoard.turn)
+        pygame.draw.rect(window, kingInCheckColour, getRectFromGridPosition(kingLocation))
+        window.blit(piecePNGs[chessBoard.piece_at(kingLocation).symbol()], getCoordsFromGridPosition(kingLocation, piecePadding))
+
+    if mouseButtonDown and selectedPiece != None:
+        pygame.draw.rect(window, pieceSelectedColour, getRectFromGridPosition(selectedPieceGridPosition))
+        tempSurface = pygame.Surface((windowSize, windowSize), pygame.SRCALPHA)
+        for move in list(chessBoard.legal_moves):
+            if move.from_square == selectedPieceGridPosition:
+                if (chessBoard.color_at(move.to_square) == chess.BLACK and chessBoard.turn == chess.WHITE) or (chessBoard.color_at(move.to_square) == chess.WHITE and chessBoard.turn == chess.BLACK):
+                    pygame.draw.circle(tempSurface, legalMoveCaptureColour, getCoordsFromGridPosition(move.to_square, squareSize/2), legalMoveCaptureRadius, legalMoveCaptureWidth)
+                else:
+                    pygame.draw.circle(tempSurface, legalMoveColour, getCoordsFromGridPosition(move.to_square, squareSize/2), legalMoveRadius)
+        window.blit(tempSurface, (0, 0))
+        mousePos = pygame.mouse.get_pos()
+        window.blit(piecePNGs[selectedPiece], (mousePos[0]-piecesSize/2, mousePos[1]-piecesSize/2))
 
 
 def getNextMoveFromUser():
@@ -556,6 +559,7 @@ if __name__ == "__main__":
         previousMovePiece = None
 
         chessBoard = chess.Board()
+
         goImmediatelyToMainMenu = False
         while chessBoard.outcome() == None and not goImmediatelyToMainMenu:
             displayBoard()
