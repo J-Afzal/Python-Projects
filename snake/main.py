@@ -9,17 +9,16 @@ import pygame
 def createBlankWindow():
     blankWindow = pygame.Surface((windowWidth, windowHeight))
     blankWindow.fill(windowBgDark)
-    startForX = squareSize
 
+    drawLightRect = False
     for y in range(infoHeight, windowHeight, squareSize):
-        if (y-infoHeight) % (squareSize * 2):
-            startForX = squareSize
-        else:
-            startForX = 0
-        for x in range(startForX, windowWidth, squareSize*2):
-            pygame.draw.rect(blankWindow, windowBgLight, (x, y, squareSize, squareSize))
+        for x in range(0, windowWidth, squareSize):
+            if drawLightRect:
+                pygame.draw.rect(blankWindow, windowBgLight, (x, y, squareSize, squareSize))
+            drawLightRect = not drawLightRect
+        drawLightRect = not drawLightRect
 
-    pygame.draw.rect(blankWindow, infoBg, (0, 0, windowWidth, infoHeight))
+    pygame.draw.rect(blankWindow, menuWindowBg, (0, 0, windowWidth, infoHeight))
 
     return blankWindow
 
@@ -34,7 +33,7 @@ def createMenus(txt, txtPosX, txtPosYTitle, txtPosYBody, txtPosYBodyDifference, 
 
     for i in range(selectionStart, selectionEnd+1):
         temp = pygame.Surface((windowWidth, windowHeight))
-        temp.fill(windowBgDark)
+        temp.fill(menuWindowBg)
         for j in range(len(txt)):
             if j == i:
                 if j == 0:
@@ -54,18 +53,20 @@ def createMenus(txt, txtPosX, txtPosYTitle, txtPosYBody, txtPosYBodyDifference, 
 def createInfoMenu():
     fontOne = pygame.font.SysFont(mainFont, 72)
     fontTwo = pygame.font.SysFont(mainFont, 32)
+    fontThree = pygame.font.SysFont(mainFont, 48)
 
     lineOne = "INFORMATION"
     lineTwo = "WASD = SNAKE AND MENU NAVIGATION"
     lineThree = "K = SPEED UP SNAKE"
     lineFour = "ESC = PAUSE/UNPAUSE/GO BACK"
-    lineFive = "R = RESTART WHEN GAMER OVER"
-    lineSix = "Q = QUIT TO MAIN MENU WHEN GAME OVER"
-    lineSeven = "CTRL + Q = QUIT PROGRAM"
-    lineEight = "BACK TO MAIN MENU"
+    lineFive = "H = HIDE GAME OVER MESSAGE"
+    lineSix = "R = RESTART WHEN GAMER OVER"
+    lineSeven = "Q = QUIT TO MAIN MENU"
+    lineEight = "CTRL + Q = QUIT PROGRAM"
+    lineNine = "BACK TO MAIN MENU"
 
     infoMenu = pygame.Surface((windowWidth, windowHeight))
-    infoMenu.fill(windowBgDark)
+    infoMenu.fill(menuWindowBg)
     infoMenu.blit(fontOne.render(lineOne, True, textColour), (50, 50))
     infoMenu.blit(fontTwo.render(lineTwo, True, textColour), (50, 150))
     infoMenu.blit(fontTwo.render(lineThree, True, textColour), (50, 200))
@@ -73,30 +74,30 @@ def createInfoMenu():
     infoMenu.blit(fontTwo.render(lineFive, True, textColour), (50, 300))
     infoMenu.blit(fontTwo.render(lineSix, True, textColour), (50, 350))
     infoMenu.blit(fontTwo.render(lineSeven, True, textColour), (50, 400))
-    infoMenu.blit(fontTwo.render(lineEight, True, selectedTextColour), (50, 650))
+    infoMenu.blit(fontTwo.render(lineEight, True, textColour), (50, 450))
+    infoMenu.blit(fontThree.render(lineNine, True, selectedTextColour), (50, 700))
 
     return infoMenu
 
 
 def createGameOverMenu():
-    fontOne = pygame.font.SysFont(mainFont, 72)
-    fontTwo = pygame.font.SysFont(mainFont, 48)
+    gameOverText = pygame.font.SysFont(mainFont, gameOverFontSize).render("GAME OVER", True, textColour)
+    rematchTextSelected = pygame.font.SysFont(mainFont, gameOverOptionsFontSize).render("REMATCH", True, selectedTextColour)
+    rematchText = pygame.font.SysFont(mainFont, gameOverOptionsFontSize).render("REMATCH", True, textColour)
+    quitTextSelected = pygame.font.SysFont(mainFont, gameOverOptionsFontSize).render("QUIT", True, selectedTextColour)
+    quitText = pygame.font.SysFont(mainFont, gameOverOptionsFontSize).render("QUIT", True, textColour)
 
-    lineOne = "GAME OVER"
-    lineTwo = "RESTART"
-    lineThree = "QUIT"
+    one = pygame.Surface((gameOverWidth, gameOverHeight))
+    one.fill(menuWindowBg)
+    one.blit(gameOverText, gameOverText.get_rect(center=(gameOverWidth/2, 50)))
+    one.blit(rematchTextSelected, rematchTextSelected.get_rect(center=(gameOverWidth/2, gameOverHeight-115)))
+    one.blit(quitText, quitText.get_rect(center=(gameOverWidth/2, gameOverHeight-35)))
 
-    one = pygame.Surface((350, 250))
-    one.fill(infoBg)
-    one.blit(fontOne.render(lineOne, True, textColour), (25, 25))
-    one.blit(fontTwo.render(lineTwo, True, selectedTextColour), (100, 125))
-    one.blit(fontTwo.render(lineThree, True, textColour), (133, 200))
-
-    two = pygame.Surface((350, 250))
-    two.fill(infoBg)
-    two.blit(fontOne.render(lineOne, True, textColour), (25, 25))
-    two.blit(fontTwo.render(lineTwo, True, textColour), (100, 125))
-    two.blit(fontTwo.render(lineThree, True, selectedTextColour), (133, 200))
+    two = pygame.Surface((gameOverWidth, gameOverHeight))
+    two.fill(menuWindowBg)
+    two.blit(gameOverText, gameOverText.get_rect(center=(gameOverWidth/2, 50)))
+    two.blit(rematchText, rematchText.get_rect(center=(gameOverWidth/2, gameOverHeight-115)))
+    two.blit(quitTextSelected, quitTextSelected.get_rect(center=(gameOverWidth/2, gameOverHeight-35)))
 
     return [one, two]
 
@@ -218,15 +219,13 @@ def displaySnakeSpeedOptionsMenu():
                 elif event.key == pygame.K_RETURN:
                     if currentSelection == 0:
                         gameSpeed = 5
-                        return
                     elif currentSelection == 1:
                         gameSpeed = 10
-                        return
                     elif currentSelection == 2:
                         gameSpeed = 15
-                        return
                     elif currentSelection == 3:
-                        return
+                        pass
+                    return
                 elif event.key == pygame.K_ESCAPE:
                     return
 
@@ -265,15 +264,13 @@ def displayAppleAmountOptionsMenu():
                 elif event.key == pygame.K_RETURN:
                     if currentSelection == 0:
                         numberOfApples = 1
-                        return
                     elif currentSelection == 1:
                         numberOfApples = 3
-                        return
                     elif currentSelection == 2:
                         numberOfApples = 5
-                        return
                     elif currentSelection == 3:
-                        return
+                        pass
+                    return
                 elif event.key == pygame.K_ESCAPE:
                     return
 
@@ -284,6 +281,7 @@ def displayAppleAmountOptionsMenu():
 
 def displayInfoMenu():
     window.blit(infoMenu, (0, 0))
+    pygame.display.update()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -295,8 +293,6 @@ def displayInfoMenu():
                     sys.exit()
                 elif event.key == pygame.K_RETURN or event.key == pygame.K_ESCAPE:
                     return
-
-        pygame.display.update()
 
 
 def displayGameOverMenu():
@@ -330,9 +326,11 @@ def displayGameOverMenu():
                     elif currentSelection == 1:
                         return True
 
-        window.blit(gameOverMenu[currentSelection], (145, 323))
-
-        pygame.display.update()
+        if not pygame.key.get_pressed()[pygame.K_h]:
+            window.blit(gameOverMenu[currentSelection], (windowSize/2-gameOverWidth/2, windowSize/2-gameOverHeight/2+infoHeight))
+            pygame.display.update()
+        else:
+            displaySnake()
 
 
 def gameOver():
@@ -358,6 +356,8 @@ def gameIsPaused():
     for i in range(0, len(pointsX)):
         pygame.draw.rect(window, (colourMax-colourStep*i, colourMax-colourStep*i, colourMax-colourStep*i), (pointsX[i], pointsY[i], squareSize, squareSize))
 
+    pygame.display.update()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -370,8 +370,6 @@ def gameIsPaused():
                 elif event.key == pygame.K_ESCAPE:
                     startTime = time.time()
                     return
-
-        pygame.display.update()
 
 
 def displaySnake():
@@ -395,6 +393,8 @@ def displaySnake():
 
     for i in range(len(pointsX)):
         pygame.draw.rect(window, (0, colourMax-colourStep*i, 0), (pointsX[i], pointsY[i], squareSize, squareSize))
+
+    pygame.display.update()
 
 
 def updateSnakePosition():
@@ -421,6 +421,8 @@ def updateSnakePosition():
         pointsY.insert(0, pointsY[0])
         pointsX.pop()
         pointsY.pop()
+
+    checkForApple()
 
 
 def checkForApple():
@@ -451,22 +453,26 @@ def createNewApplePositions():
 
 
 if __name__ == "__main__":
-    highScore = 0
-    squareSize = 32
-    gameSpeed = 10
-    numberOfApples = 3
-
     windowSize = 640
     infoHeight = 128
-
     windowWidth = windowSize
     windowHeight = windowSize + infoHeight
     windowMidX = int(windowWidth / 2)
     windowMidY = int((windowHeight - infoHeight) / 2) + infoHeight
 
-    infoBg = (8, 8, 8)
+    pygame.init()
+    pygame.display.set_caption("Snake")
+    pygame.display.set_icon(pygame.image.load("snake\\resources\\app.ico"))
+    window = pygame.display.set_mode((windowWidth, windowHeight))
+    clock = pygame.time.Clock()
+
+    squareSize = 32
+    gameSpeed = 10
+    numberOfApples = 3
+
     windowBgDark = (16, 16, 16)
     windowBgLight = (24, 24, 24)
+    menuWindowBg = (8, 8, 8)
 
     colourMin = 32
     colourMax = 196
@@ -475,23 +481,23 @@ if __name__ == "__main__":
     textColour = (255, 255, 255)
     selectedTextColour = (0, 128, 156)
 
-    pygame.init()
-    pygame.display.set_caption("Snake")
-    pygame.display.set_icon(pygame.image.load("snake\\resources\\app.ico"))
-    window = pygame.display.set_mode((windowWidth, windowHeight))
-    clock = pygame.time.Clock()
+    gameOverWidth = 350
+    gameOverHeight = 250
+    gameOverFontSize = 72
+    gameOverOptionsFontSize = 48
+
+    highScore = 0
 
     blankWindow = createBlankWindow()
-    mainMenus = createMenus(["PLAY", "MAP SIZE", "SNAKE SPEED", "NUMBER OF APPLES", "INFO", "QUIT"], 50, 50, 200, 100, 128, 48, 0, 5)
-    mapSizeMenus = createMenus(["MAP SIZES", "10 x 10", "20 x 20", "30 x 30", "BACK TO MAIN MENU"], 50, 50, 150, 100, 72, 48, 1, 4)
-    snakeSpeedMenus = createMenus(["SNAKE SPEED", "5", "10", "15", "BACK TO MAIN MENU"], 50, 50, 150, 100, 72, 48, 1, 4)
-    appleAmountMenus = createMenus(["NUMBER OF APPLES", "1", "3", "5", "BACK TO MAIN MENU"], 50, 50, 150, 100, 72, 48, 1, 4)
+    mainMenus = createMenus(["PLAY SNAKE", "MAP SIZE", "SNAKE SPEED", "NUMBER OF APPLES", "INFO", "QUIT"], 50, 50, 200, 100, 110, 48, 0, 5)
+    mapSizeMenus = createMenus(["MAP SIZES", "10 x 10", "20 x 20", "40 x 40", "BACK TO MAIN MENU"], 50, 50, 300, 100, 72, 48, 1, 4)
+    snakeSpeedMenus = createMenus(["SNAKE SPEED", "5", "10", "15", "BACK TO MAIN MENU"], 50, 50, 300, 100, 72, 48, 1, 4)
+    appleAmountMenus = createMenus(["NUMBER OF APPLES", "1", "3", "5", "BACK TO MAIN MENU"], 50, 50, 300, 100, 72, 48, 1, 4)
     infoMenu = createInfoMenu()
     gameOverMenu = createGameOverMenu()
 
     goToMainMenu = True
-    programIsRunning = True
-    while programIsRunning:
+    while True:
         if goToMainMenu:
             displayMainMenu()
 
@@ -503,15 +509,13 @@ if __name__ == "__main__":
         elapsedTime = 0.0
         startTime = time.time()
 
-        while not gameOver():
-            displaySnake()
-
+        goImmediatelyToMainMenu = False
+        while not gameOver() and not goImmediatelyToMainMenu:
             if pygame.key.get_pressed()[pygame.K_k]:
                 clock.tick(gameSpeed * 2)
             else:
                 clock.tick(gameSpeed)
 
-            inputReceived = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
@@ -520,24 +524,23 @@ if __name__ == "__main__":
                     if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
                         pygame.display.quit()
                         sys.exit()
+                    elif event.key == pygame.K_q:
+                        goImmediatelyToMainMenu = True
+                        goToMainMenu = True
                     elif event.key == pygame.K_ESCAPE:
                         gameIsPaused()
-                    elif (event.key == pygame.K_UP or event.key == pygame.K_w) and snakeDirection != "DOWN" and not inputReceived:
+                    elif (event.key == pygame.K_UP or event.key == pygame.K_w) and snakeDirection != "DOWN":
                         snakeDirection = "UP"
-                        inputReceived = True
-                    elif (event.key == pygame.K_DOWN or event.key == pygame.K_s) and snakeDirection != "UP" and not inputReceived:
+                    elif (event.key == pygame.K_DOWN or event.key == pygame.K_s) and snakeDirection != "UP":
                         snakeDirection = "DOWN"
-                        inputReceived = True
-                    elif (event.key == pygame.K_LEFT or event.key == pygame.K_a) and snakeDirection != "RIGHT" and not inputReceived:
+                    elif (event.key == pygame.K_LEFT or event.key == pygame.K_a) and snakeDirection != "RIGHT":
                         snakeDirection = "LEFT"
-                        inputReceived = True
-                    elif (event.key == pygame.K_RIGHT or event.key == pygame.K_d) and snakeDirection != "LEFT" and not inputReceived:
+                    elif (event.key == pygame.K_RIGHT or event.key == pygame.K_d) and snakeDirection != "LEFT":
                         snakeDirection = "RIGHT"
-                        inputReceived = True
 
             updateSnakePosition()
-            checkForApple()
 
-            pygame.display.update()
+            displaySnake()
 
-        goToMainMenu = displayGameOverMenu()
+        if not goImmediatelyToMainMenu:
+            goToMainMenu = displayGameOverMenu()

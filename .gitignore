@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Remove .exe files
-*.exe
+.exes/
