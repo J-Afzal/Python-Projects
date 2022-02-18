@@ -6,6 +6,13 @@ import random
 import pygame
 
 
+def getPath(fileName):
+    try:
+        return os.path.join(sys._MEIPASS, fileName)
+    except Exception:
+        return "snake\\resources\\" + fileName
+
+
 def createBlankWindow():
     blankWindow = pygame.Surface((windowWidth, windowHeight))
     blankWindow.fill(windowBgDark)
@@ -462,7 +469,7 @@ if __name__ == "__main__":
 
     pygame.init()
     pygame.display.set_caption("Snake")
-    pygame.display.set_icon(pygame.image.load("snake\\resources\\app.ico"))
+    pygame.display.set_icon(pygame.image.load(getPath("app.ico")))
     window = pygame.display.set_mode((windowWidth, windowHeight))
     clock = pygame.time.Clock()
 

@@ -7,6 +7,13 @@ import forex_python.converter
 import forexData
 
 
+def getPath(fileName):
+    try:
+        return os.path.join(sys._MEIPASS, fileName)
+    except Exception:
+        return "currency converter\\resources\\" + fileName
+
+
 def updateConversion(one=None, two=None, three=None):
     # The trace has to be removed so that it is not triggered again
     # when using amount.set(). The trace is again set at the end.
@@ -239,14 +246,14 @@ if __name__ == "__main__":
     root.title("Currency Converter")
     root.geometry(f"1012x258+{int(root.winfo_screenwidth()/2-1012/2)}+{int(root.winfo_screenheight()/2-258/2)}")
     root.resizable(width=False, height=False)
-    root.iconphoto(True, tkinter.PhotoImage(file="currency converter\\resources\\app.png"))
-    root.tk.call("source", "themes\\sun-valley.tcl")
+    root.iconphoto(True, tkinter.PhotoImage(file=getPath("app.png")))
+    root.tk.call("source", getPath("theme\\sun-valley.tcl"))
     root.tk.call("set_theme", "dark")
 
-    swapButtonImg = tkinter.PhotoImage(file="currency converter\\resources\\swapButton.png")
-    updateButtonImg = tkinter.PhotoImage(file="currency converter\\resources\\updateButton.png")
-    infoButtonImg = tkinter.PhotoImage(file="currency converter\\resources\\infoButton.png")
-    copyButtonImg = tkinter.PhotoImage(file="currency converter\\resources\\copyButton.png")
+    swapButtonImg = tkinter.PhotoImage(file=getPath("swapButton.png"))
+    updateButtonImg = tkinter.PhotoImage(file=getPath("updateButton.png"))
+    infoButtonImg = tkinter.PhotoImage(file=getPath("infoButton.png"))
+    copyButtonImg = tkinter.PhotoImage(file=getPath("copyButton.png"))
 
     amount = tkinter.StringVar(value="£ 1.00")
     # This is required so that the currency symbol can be found so that it can be updated

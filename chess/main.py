@@ -6,6 +6,13 @@ import pygame
 import chess
 
 
+def getPath(fileName):
+    try:
+        return os.path.join(sys._MEIPASS, fileName)
+    except Exception:
+        return "chess\\resources\\" + fileName
+
+
 def getGridPositionFromCoords(Coords):
     return 8 * int(Coords[1] / squareSize) + int(Coords[0] / squareSize)
 
@@ -477,7 +484,7 @@ if __name__ == "__main__":
 
     pygame.init()
     pygame.display.set_caption("Chess")
-    pygame.display.set_icon(pygame.image.load("chess\\resources\\app.ico"))
+    pygame.display.set_icon(pygame.image.load(getPath("app.ico")))
     window = pygame.display.set_mode((windowSize, windowSize))
 
     windowBgDark = (81, 42, 42)
@@ -511,18 +518,18 @@ if __name__ == "__main__":
     humanPlayer = chess.WHITE
 
     piecePNGs = {
-        "K": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white king.png"), (piecesSize, piecesSize)),
-        "Q": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white queen.png"), (piecesSize, piecesSize)),
-        "B": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white bishop.png"), (piecesSize, piecesSize)),
-        "R": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white rook.png"), (piecesSize, piecesSize)),
-        "N": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white knight.png"), (piecesSize, piecesSize)),
-        "P": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\white pawn.png"), (piecesSize, piecesSize)),
-        "k": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black king.png"), (piecesSize, piecesSize)),
-        "q": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black queen.png"), (piecesSize, piecesSize)),
-        "b": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black bishop.png"), (piecesSize, piecesSize)),
-        "r": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black rook.png"), (piecesSize, piecesSize)),
-        "n": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black knight.png"), (piecesSize, piecesSize)),
-        "p": pygame.transform.smoothscale(pygame.image.load("chess\\resources\\black pawn.png"), (piecesSize, piecesSize)),
+        "K": pygame.transform.smoothscale(pygame.image.load(getPath("white king.png")), (piecesSize, piecesSize)),
+        "Q": pygame.transform.smoothscale(pygame.image.load(getPath("white queen.png")), (piecesSize, piecesSize)),
+        "B": pygame.transform.smoothscale(pygame.image.load(getPath("white bishop.png")), (piecesSize, piecesSize)),
+        "R": pygame.transform.smoothscale(pygame.image.load(getPath("white rook.png")), (piecesSize, piecesSize)),
+        "N": pygame.transform.smoothscale(pygame.image.load(getPath("white knight.png")), (piecesSize, piecesSize)),
+        "P": pygame.transform.smoothscale(pygame.image.load(getPath("white pawn.png")), (piecesSize, piecesSize)),
+        "k": pygame.transform.smoothscale(pygame.image.load(getPath("black king.png")), (piecesSize, piecesSize)),
+        "q": pygame.transform.smoothscale(pygame.image.load(getPath("black queen.png")), (piecesSize, piecesSize)),
+        "b": pygame.transform.smoothscale(pygame.image.load(getPath("black bishop.png")), (piecesSize, piecesSize)),
+        "r": pygame.transform.smoothscale(pygame.image.load(getPath("black rook.png")), (piecesSize, piecesSize)),
+        "n": pygame.transform.smoothscale(pygame.image.load(getPath("black knight.png")), (piecesSize, piecesSize)),
+        "p": pygame.transform.smoothscale(pygame.image.load(getPath("black pawn.png")), (piecesSize, piecesSize)),
     }
 
     gameOutcomes = [

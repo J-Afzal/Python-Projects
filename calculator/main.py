@@ -5,6 +5,13 @@ import cmath
 import random
 
 
+def getPath(fileName):
+    try:
+        return os.path.join(sys._MEIPASS, fileName)
+    except Exception:
+        return "calculator\\resources\\" + fileName
+
+
 def updateOutput(one=None, two=None, three=None, calledByCode=False, resetCurrentSelection=True):
     if not calledByCode:
         if len(inputText.get()) > 64:
@@ -313,8 +320,8 @@ if __name__ == "__main__":
     root.title("Calculator")
     root.geometry(f"856x834+{int(root.winfo_screenwidth()/2-834/2)}+{int(root.winfo_screenheight()/2-830/2)}")
     root.resizable(width=False, height=False)
-    root.iconphoto(True, tkinter.PhotoImage(file="calculator\\resources\\app.png"))
-    root.tk.call("source", "themes\\forest-dark.tcl")
+    root.iconphoto(True, tkinter.PhotoImage(file=getPath("app.png")))
+    root.tk.call("source", getPath("theme\\forest-dark.tcl"))
     tkinter.ttk.Style().theme_use("forest-dark")
 
     inputText = tkinter.StringVar(value="")
@@ -333,41 +340,41 @@ if __name__ == "__main__":
     root.bind("<Control-g>", goldenRationButtonPressed)
     root.bind("<Control-q>", quitMainWindow)
 
-    ansImg = tkinter.PhotoImage(file="calculator\\resources\\ans.png")
-    randIntImg = tkinter.PhotoImage(file="calculator\\resources\\randInt.png")
-    previousImg = tkinter.PhotoImage(file="calculator\\resources\\previous.png")
-    infoImg = tkinter.PhotoImage(file="calculator\\resources\\info.png")
-    nextImg = tkinter.PhotoImage(file="calculator\\resources\\next.png")
-    randfloatImg = tkinter.PhotoImage(file="calculator\\resources\\randfloat.png")
-    acImg = tkinter.PhotoImage(file="calculator\\resources\\ac.png")
+    ansImg = tkinter.PhotoImage(file=getPath("ans.png"))
+    randIntImg = tkinter.PhotoImage(file=getPath("randInt.png"))
+    previousImg = tkinter.PhotoImage(file=getPath("previous.png"))
+    infoImg = tkinter.PhotoImage(file=getPath("info.png"))
+    nextImg = tkinter.PhotoImage(file=getPath("next.png"))
+    randfloatImg = tkinter.PhotoImage(file=getPath("randfloat.png"))
+    acImg = tkinter.PhotoImage(file=getPath("ac.png"))
 
-    sinImg = tkinter.PhotoImage(file="calculator\\resources\\sin.png")
-    cosImg = tkinter.PhotoImage(file="calculator\\resources\\cos.png")
-    tanImg = tkinter.PhotoImage(file="calculator\\resources\\tan.png")
-    logImg = tkinter.PhotoImage(file="calculator\\resources\\log.png")
-    logTenImg = tkinter.PhotoImage(file="calculator\\resources\\log10.png")
-    lnImg = tkinter.PhotoImage(file="calculator\\resources\\ln.png")
+    sinImg = tkinter.PhotoImage(file=getPath("sin.png"))
+    cosImg = tkinter.PhotoImage(file=getPath("cos.png"))
+    tanImg = tkinter.PhotoImage(file=getPath("tan.png"))
+    logImg = tkinter.PhotoImage(file=getPath("log.png"))
+    logTenImg = tkinter.PhotoImage(file=getPath("log10.png"))
+    lnImg = tkinter.PhotoImage(file=getPath("ln.png"))
 
-    sinInvImg = tkinter.PhotoImage(file="calculator\\resources\\sinInv.png")
-    cosInvImg = tkinter.PhotoImage(file="calculator\\resources\\cosInv.png")
-    tanInvImg = tkinter.PhotoImage(file="calculator\\resources\\tanInv.png")
-    xToXImg = tkinter.PhotoImage(file="calculator\\resources\\x^x.png")
-    tenToXImg = tkinter.PhotoImage(file="calculator\\resources\\10^x.png")
-    eToXImg = tkinter.PhotoImage(file="calculator\\resources\\e^x.png")
+    sinInvImg = tkinter.PhotoImage(file=getPath("sinInv.png"))
+    cosInvImg = tkinter.PhotoImage(file=getPath("cosInv.png"))
+    tanInvImg = tkinter.PhotoImage(file=getPath("tanInv.png"))
+    xToXImg = tkinter.PhotoImage(file=getPath("x^x.png"))
+    tenToXImg = tkinter.PhotoImage(file=getPath("10^x.png"))
+    eToXImg = tkinter.PhotoImage(file=getPath("e^x.png"))
 
-    xToImg = tkinter.PhotoImage(file="calculator\\resources\\x^.png")
-    xToTwoImg = tkinter.PhotoImage(file="calculator\\resources\\x^2.png")
-    xToThreeImg = tkinter.PhotoImage(file="calculator\\resources\\x^3.png")
-    xToMinusOneImg = tkinter.PhotoImage(file="calculator\\resources\\x^-1.png")
-    xFactorialImg = tkinter.PhotoImage(file="calculator\\resources\\x!.png")
-    absImg = tkinter.PhotoImage(file="calculator\\resources\\abs.png")
+    xToImg = tkinter.PhotoImage(file=getPath("x^.png"))
+    xToTwoImg = tkinter.PhotoImage(file=getPath("x^2.png"))
+    xToThreeImg = tkinter.PhotoImage(file=getPath("x^3.png"))
+    xToMinusOneImg = tkinter.PhotoImage(file=getPath("x^-1.png"))
+    xFactorialImg = tkinter.PhotoImage(file=getPath("x!.png"))
+    absImg = tkinter.PhotoImage(file=getPath("abs.png"))
 
-    rootImg = tkinter.PhotoImage(file="calculator\\resources\\root.png")
-    squareRootImg = tkinter.PhotoImage(file="calculator\\resources\\sqrt.png")
-    cubeRootImg = tkinter.PhotoImage(file="calculator\\resources\\cube root.png")
-    piImg = tkinter.PhotoImage(file="calculator\\resources\\pi.png")
-    tauImg = tkinter.PhotoImage(file="calculator\\resources\\tau.png")
-    goldenRatioImg = tkinter.PhotoImage(file="calculator\\resources\\golden ratio.png")
+    rootImg = tkinter.PhotoImage(file=getPath("root.png"))
+    squareRootImg = tkinter.PhotoImage(file=getPath("sqrt.png"))
+    cubeRootImg = tkinter.PhotoImage(file=getPath("cube root.png"))
+    piImg = tkinter.PhotoImage(file=getPath("pi.png"))
+    tauImg = tkinter.PhotoImage(file=getPath("tau.png"))
+    goldenRatioImg = tkinter.PhotoImage(file=getPath("golden ratio.png"))
 
     entryFrame = tkinter.ttk.Frame(root, padding=framePad)
     entryFrame.grid(column=0, row=0)
