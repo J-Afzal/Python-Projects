@@ -1,10 +1,13 @@
 import PyInstaller.config
-PyInstaller.config.CONF['distpath'] = "."
+PyInstaller.config.CONF['distpath'] = '.'
 
-chessAnalysis = Analysis(['D:\\Google Drive\\Coding\\Python-Projects\\chess\\main.py'],
+##############################################################################################################################
+
+
+chessAnalysis = Analysis(['..\\chess\\main.py'],
                          pathex=[],
                          binaries=[],
-                         datas=[('D:\\Google Drive\\Coding\\Python-Projects\\chess\\resources\\*.*', '.')],
+                         datas=[('..\\chess\\resources\\*.*', '.')],
                          hiddenimports=[],
                          hookspath=[],
                          hooksconfig={},
@@ -35,16 +38,15 @@ chessEXE = EXE(chessPYZ,
                target_arch=None,
                codesign_identity=None,
                entitlements_file=None,
-               icon='D:\\Google Drive\\Coding\\Python-Projects\\chess\\resources\\app.ico')
-
+               icon='..\\chess\\resources\\app.ico')
 
 ##############################################################################################################################
 
 
-snakeAnalysis = Analysis(['D:\\Google Drive\\Coding\\Python-Projects\\snake\\main.py'],
+snakeAnalysis = Analysis(['..\\snake\\main.py'],
                          pathex=[],
                          binaries=[],
-                         datas=[('D:\\Google Drive\\Coding\\Python-Projects\\snake\\resources\\*.*', '.')],
+                         datas=[('..\\snake\\resources\\*.*', '.')],
                          hiddenimports=[],
                          hookspath=[],
                          hooksconfig={},
@@ -75,18 +77,18 @@ snakeEXE = EXE(snakePYZ,
                target_arch=None,
                codesign_identity=None,
                entitlements_file=None,
-               icon='D:\\Google Drive\\Coding\\Python-Projects\\snake\\resources\\app.ico')
+               icon='..\\snake\\resources\\app.ico')
 
 
 ##############################################################################################################################
 
 
-calculatorAnalysis = Analysis(['D:\\Google Drive\\Coding\\Python-Projects\\calculator\\main.py'],
+calculatorAnalysis = Analysis(['..\\calculator\\main.py'],
                               pathex=[],
                               binaries=[],
-                              datas=[('D:\\Google Drive\\Coding\\Python-Projects\\calculator\\resources\\*.*', '.'),
-                                     ('D:\\Google Drive\\Coding\\Python-Projects\\calculator\\resources\\theme\\forest-dark.tcl', 'theme'),
-                                     ('D:\\Google Drive\\Coding\\Python-Projects\\calculator\\resources\\theme\\forest-dark', 'theme\\forest-dark')],
+                              datas=[('..\\calculator\\resources\\*.*', '.'),
+                                     ('..\\calculator\\resources\\theme\\forest-dark.tcl', 'theme'),
+                                     ('..\\calculator\\resources\\theme\\forest-dark', 'theme\\forest-dark')],
                               hiddenimports=[],
                               hookspath=[],
                               hooksconfig={},
@@ -117,18 +119,18 @@ calculatorEXE = EXE(calculatorPYZ,
                     target_arch=None,
                     codesign_identity=None,
                     entitlements_file=None,
-                    icon='D:\\Google Drive\\Coding\\Python-Projects\\calculator\\resources\\app.ico')
+                    icon='..\\calculator\\resources\\app.ico')
 
 
 ##############################################################################################################################
 
 
-currencyConverterAnalysis = Analysis(['D:\\Google Drive\\Coding\\Python-Projects\\currency converter\\main.py'],
+currencyConverterAnalysis = Analysis(['..\\currency converter\\main.py'],
                                      pathex=[],
                                      binaries=[],
-                                     datas=[('D:\\Google Drive\\Coding\\Python-Projects\\currency converter\\resources\\*.*', '.'),
-                                            ('D:\\Google Drive\\Coding\\Python-Projects\\currency converter\\resources\\theme\\sun-valley.tcl', 'theme'),
-                                            ('D:\\Google Drive\\Coding\\Python-Projects\\currency converter\\resources\\theme\\sun-valley', 'theme\\sun-valley')],
+                                     datas=[('..\\currency converter\\resources\\*.*', '.'),
+                                            ('..\\currency converter\\resources\\theme\\sun-valley.tcl', 'theme'),
+                                            ('..\\currency converter\\resources\\theme\\sun-valley', 'theme\\sun-valley')],
                                      hiddenimports=[],
                                      hookspath=[],
                                      hooksconfig={},
@@ -159,4 +161,4 @@ currencyConverterEXE = EXE(currencyConverterPYZ,
                            target_arch=None,
                            codesign_identity=None,
                            entitlements_file=None,
-                           icon='D:\\Google Drive\\Coding\\Python-Projects\\currency converter\\resources\\app.ico')
+                           icon='..\\currency converter\\resources\\app.ico')
