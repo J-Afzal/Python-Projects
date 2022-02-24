@@ -1,15 +1,19 @@
 # Project List
-* Text Editor (using Curses)
-* Chess (using Pygame)
-* Snake (using Pygame)
-* Reddit Scraper (using Kivy)
-* YouTube Downloader (using Kivy)
-* Media Player (using PyQt)
-* File Explorer (using PyQt)
-* Calculator (using Tkinter)
-* Currency Converter (using Tkinter)
+Using Pygame:
+  * Chess
+  * Snake
 
-# Text Editor
+Using Kivy:
+  * YouTube Downloader
+  * Text Editor
+
+Using PyQt:
+  * Music Player
+  * File Explorer
+
+Using Tkinter
+  * Calculator
+  * Currency Converter
 
 # Chess
 <h3 align="center">
@@ -69,11 +73,11 @@
   <img src="snake/screenshots/info window.png">
 </p>
 
-# Reddit Scraper
-
 # YouTube Downloader
 
-# Media Player
+# Text Editor
+
+# Music Player
 
 # File Explorer
 
