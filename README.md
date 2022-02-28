@@ -1,3 +1,6 @@
+# About
+An assortment of python projects that I undertook in order to learn Python.
+
 # Project List
 Using Pygame:
   * Chess
