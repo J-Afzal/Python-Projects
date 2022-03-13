@@ -1,6 +1,12 @@
 # About
 An assortment of python projects that I undertook in order to learn Python
 
+# Building
+You can use the .pyinstaller/build.spec file to compile each project in to a single .exe file using the following command within the .pyinstaller folder:
+```
+pyinstaller build.spec
+```
+
 # Project List
 Using Pygame:
   * Chess
