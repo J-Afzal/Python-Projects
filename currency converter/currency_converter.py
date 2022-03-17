@@ -239,7 +239,7 @@ class App:
         self.forex_data['update_date'] = datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')
 
         with open(self.get_path('forex_data.json'), 'w', encoding="utf8") as f:
-            json.dump(self.forex_data, f)
+            json.dump(self.forex_data, f, indent=2)
 
         self.update_conversion()
         update_window.destroy()
