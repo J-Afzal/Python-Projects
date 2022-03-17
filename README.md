@@ -14,15 +14,10 @@ Using Pygame:
 
 Using Kivy:
   * YouTube Downloader
-  * Text Editor
-
-Using PyQt:
-  * Music Player
-  * File Explorer
 
 Using Tkinter
-  * Calculator
   * Currency Converter
+  * Calculator
 
 # Chess
 <h3 align="center"> Main Menu </h3>
@@ -48,18 +43,6 @@ Using Tkinter
 
 # YouTube Downloader
 
-# Text Editor
-
-# Music Player
-
-# File Explorer
-
-# Calculator
-<h3 align="center"> Main Window </h3>
-<p align="center"> <img src="calculator/screenshots/main window.png"> </p>
-<h3 align="center"> Info Window </h3>
-<p align="center"> <img src="calculator/screenshots/info window.png"> </p>
-
 # Currency Converter
 <h3 align="center"> Main Window </h3>
 <p align="center"> <img src="currency converter/screenshots/main window.png"> </p>
@@ -67,3 +50,9 @@ Using Tkinter
 <p align="center"> <img src="currency converter/screenshots/info window.png"> </p>
 <h3 align="center"> Update Window </h3>
 <p align="center"> <img src="currency converter/screenshots/update window.png"> </p>
+
+# Calculator
+<h3 align="center"> Main Window </h3>
+<p align="center"> <img src="calculator/screenshots/main window.png"> </p>
+<h3 align="center"> Info Window </h3>
+<p align="center"> <img src="calculator/screenshots/info window.png"> </p>
