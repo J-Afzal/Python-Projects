@@ -4,7 +4,7 @@ PyInstaller.config.CONF['distpath'] = '.'
 ##############################################################################################################################
 
 
-chessAnalysis = Analysis(['..\\chess\\main.py'],
+chessAnalysis = Analysis(['..\\chess\\main.py', '..\\chess\\chess_game.py'],
                          pathex=[],
                          binaries=[],
                          datas=[('..\\chess\\resources\\*.*', '.')],
@@ -125,7 +125,7 @@ calculatorEXE = EXE(calculatorPYZ,
 ##############################################################################################################################
 
 
-currencyConverterAnalysis = Analysis(['..\\currency converter\\main.py'],
+currencyConverterAnalysis = Analysis(['..\\currency converter\\main.py', '..\\currency converter\\currency_converter.py'],
                                      pathex=[],
                                      binaries=[],
                                      datas=[('..\\currency converter\\resources\\*.*', '.'),
