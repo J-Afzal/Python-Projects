@@ -206,7 +206,6 @@ class App:
 
     def create_info_menu(self):
         info_menu = pygame.Surface((self.window_size, self.window_size))
-
         info_menu.fill(self.menu_window_bg)
         info_menu.blit(self.info_menu_title_font.render('INFORMATION', True, self.text_colour), (50, 50))
         info_menu.blit(self.info_menu_body_font.render(' USE THE MOUSE TO DRAG AND DROP PIECES', True, self.text_colour), (50, 150))
