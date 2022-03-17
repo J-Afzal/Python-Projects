@@ -267,7 +267,7 @@ class App:
                         pygame.display.quit()
                         sys.exit()
 
-                x, y = pygame.mouse.get_pos()
+                _, y = pygame.mouse.get_pos()
 
                 if self.previous_mouse_position != pygame.mouse.get_pos():
                     if 50 <= y <= 120:
@@ -326,7 +326,7 @@ class App:
                     elif event.key == pygame.K_q:
                         return
 
-                x, y = pygame.mouse.get_pos()
+                _, y = pygame.mouse.get_pos()
 
                 if self.previous_mouse_position != pygame.mouse.get_pos():
                     if 245 <= y <= 285:
