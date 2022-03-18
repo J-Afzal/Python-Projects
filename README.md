@@ -2,8 +2,12 @@
 An assortment of python projects that I undertook in order to learn Python
 
 # Building
-You can use the .pyinstaller/build.spec file to compile each project in to a single .exe file using the following command within the .pyinstaller folder:
+To install all the dependencies use the following command in the root directory
+```commandline
+pip install -r requirements.txt
 ```
+To compile each project in to a single .exe file using the following command in the .pyinstaller folder:
+```commandline
 pyinstaller build.spec
 ```
 
