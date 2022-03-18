@@ -2,7 +2,7 @@
 An assortment of python projects that I undertook in order to learn Python
 
 # Building
-To install all the dependencies use the following command in the root directory
+To install all the dependencies use the following command in the root directory:
 ```commandline
 pip install -r requirements.txt
 ```
