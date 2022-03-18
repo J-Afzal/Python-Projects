@@ -43,7 +43,7 @@ chessEXE = EXE(chessPYZ,
 ##############################################################################################################################
 
 
-snakeAnalysis = Analysis(['..\\snake\\main.py'],
+snakeAnalysis = Analysis(['..\\snake\\main.py', '..\\snake\\snake.py'],
                          pathex=[],
                          binaries=[],
                          datas=[('..\\snake\\resources\\*.*', '.')],
@@ -79,51 +79,7 @@ snakeEXE = EXE(snakePYZ,
                entitlements_file=None,
                icon='..\\snake\\resources\\app.ico')
 
-
 ##############################################################################################################################
-
-
-calculatorAnalysis = Analysis(['..\\calculator\\main.py'],
-                              pathex=[],
-                              binaries=[],
-                              datas=[('..\\calculator\\resources\\*.*', '.'),
-                                     ('..\\calculator\\resources\\theme\\forest-dark.tcl', 'theme'),
-                                     ('..\\calculator\\resources\\theme\\forest-dark', 'theme\\forest-dark')],
-                              hiddenimports=[],
-                              hookspath=[],
-                              hooksconfig={},
-                              runtime_hooks=[],
-                              excludes=[],
-                              win_no_prefer_redirects=False,
-                              win_private_assemblies=False,
-                              cipher=None,
-                              noarchive=False)
-
-calculatorPYZ = PYZ(calculatorAnalysis.pure, calculatorAnalysis.zipped_data, cipher=None)
-
-calculatorEXE = EXE(calculatorPYZ,
-                    calculatorAnalysis.scripts,
-                    calculatorAnalysis.binaries,
-                    calculatorAnalysis.zipfiles,
-                    calculatorAnalysis.datas,
-                    [],
-                    name='calculator',
-                    debug=False,
-                    bootloader_ignore_signals=False,
-                    strip=False,
-                    upx=True,
-                    upx_exclude=[],
-                    runtime_tmpdir=None,
-                    console=False,
-                    disable_windowed_traceback=False,
-                    target_arch=None,
-                    codesign_identity=None,
-                    entitlements_file=None,
-                    icon='..\\calculator\\resources\\app.ico')
-
-
-##############################################################################################################################
-
 
 currencyConverterAnalysis = Analysis(['..\\currency converter\\main.py', '..\\currency converter\\currency_converter.py'],
                                      pathex=[],
@@ -162,3 +118,44 @@ currencyConverterEXE = EXE(currencyConverterPYZ,
                            codesign_identity=None,
                            entitlements_file=None,
                            icon='..\\currency converter\\resources\\app.ico')
+
+##############################################################################################################################
+
+
+calculatorAnalysis = Analysis(['..\\calculator\\main.py', '..\\calculator\\calculator.py'],
+                              pathex=[],
+                              binaries=[],
+                              datas=[('..\\calculator\\resources\\*.*', '.'),
+                                     ('..\\calculator\\resources\\theme\\forest-dark.tcl', 'theme'),
+                                     ('..\\calculator\\resources\\theme\\forest-dark', 'theme\\forest-dark')],
+                              hiddenimports=[],
+                              hookspath=[],
+                              hooksconfig={},
+                              runtime_hooks=[],
+                              excludes=[],
+                              win_no_prefer_redirects=False,
+                              win_private_assemblies=False,
+                              cipher=None,
+                              noarchive=False)
+
+calculatorPYZ = PYZ(calculatorAnalysis.pure, calculatorAnalysis.zipped_data, cipher=None)
+
+calculatorEXE = EXE(calculatorPYZ,
+                    calculatorAnalysis.scripts,
+                    calculatorAnalysis.binaries,
+                    calculatorAnalysis.zipfiles,
+                    calculatorAnalysis.datas,
+                    [],
+                    name='calculator',
+                    debug=False,
+                    bootloader_ignore_signals=False,
+                    strip=False,
+                    upx=True,
+                    upx_exclude=[],
+                    runtime_tmpdir=None,
+                    console=False,
+                    disable_windowed_traceback=False,
+                    target_arch=None,
+                    codesign_identity=None,
+                    entitlements_file=None,
+                    icon='..\\calculator\\resources\\app.ico')
