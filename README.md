@@ -16,9 +16,6 @@ Using Pygame:
   * Chess
   * Snake
 
-Using Kivy:
-  * YouTube Downloader
-
 Using Tkinter
   * Currency Converter
   * Calculator
@@ -44,8 +41,6 @@ Using Tkinter
 <p align="center"> <img src="snake/screenshots/game over.png"> </p>
 <h3 align="center"> Info Window </h3>
 <p align="center"> <img src="snake/screenshots/info window.png"> </p>
-
-# YouTube Downloader
 
 # Currency Converter
 <h3 align="center"> Main Window </h3>
