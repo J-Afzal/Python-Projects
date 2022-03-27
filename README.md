@@ -21,26 +21,18 @@ Using Tkinter
   * Calculator
 
 # Chess
-<h3 align="center"> Main Menu </h3>
-<p align="center"> <img src="chess/screenshots/main menu.png"> </p>
-<h3 align="center"> Game Window </h3>
-<p align="center"> <img src="chess/screenshots/game window.png"> </p>
-<h3 align="center"> Game Window During Pawn Promotion </h3>
-<p align="center"> <img src="chess/screenshots/game window pawn promotion.png"> </p>
-<h3 align="center"> Game Over </h3>
-<p align="center"> <img src="chess/screenshots/game over.png"> </p>
+<h3 align="center"> Main Menu (left) and Game Window (right) </h3>
+<p align="center"> <img src="chess/screenshots/main menu.png" width=500> <img src="chess/screenshots/game window.png" width=500> </p>
+<h3 align="center"> Game Window During Pawn Promotion (left) and Game Over (right) </h3>
+<p align="center"> <img src="chess/screenshots/game window pawn promotion.png" width=500> <img src="chess/screenshots/game over.png" width=500> </p>
 <h3 align="center"> Info Window </h3>
-<p align="center"> <img src="chess/screenshots/info window.png"> </p>
+<p align="center"> <img src="chess/screenshots/info window.png" width=500> </p>
 
 # Snake
-<h3 align="center"> Main Menu </h3>
-<p align="center"> <img src="snake/screenshots/main menu.png"> </p>
-<h3 align="center"> Game Window </h3>
-<p align="center"> <img src="snake/screenshots/game window.png"> </p>
-<h3 align="center"> Game Over </h3>
-<p align="center"> <img src="snake/screenshots/game over.png"> </p>
-<h3 align="center"> Info Window </h3>
-<p align="center"> <img src="snake/screenshots/info window.png"> </p>
+<h3 align="center"> Main Menu (left) amd Game Window (right) </h3>
+<p align="center"> <img src="snake/screenshots/main menu.png" width=500> <img src="snake/screenshots/game window.png" width=500> </p>
+<h3 align="center"> Game Over (left) and Info Window (right) </h3>
+<p align="center"> <img src="snake/screenshots/game over.png" width=500> <img src="snake/screenshots/info window.png" width=500> </p>
 
 # Currency Converter
 <h3 align="center"> Main Window </h3>
@@ -51,7 +43,5 @@ Using Tkinter
 <p align="center"> <img src="currency converter/screenshots/update window.png"> </p>
 
 # Calculator
-<h3 align="center"> Main Window </h3>
-<p align="center"> <img src="calculator/screenshots/main window.png"> </p>
-<h3 align="center"> Info Window </h3>
-<p align="center"> <img src="calculator/screenshots/info window.png"> </p>
+<h3 align="center"> Main Window (left) and Info Window (right) </h3>
+<p align="center"> <img src="calculator/screenshots/main window.png" height=650> <img src="calculator/screenshots/info window.png" height=650> </p>
