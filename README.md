@@ -22,17 +22,17 @@ Using Tkinter
 
 # Chess
 <h3 align="center"> Main Menu (left) and Game Window (right) </h3>
-<p align="center"> <img src="chess/screenshots/main menu.png" width=500> <img src="chess/screenshots/game window.png" width=500> </p>
+<p align="center"> <img src="chess/screenshots/main menu.png" width=450> <img src="chess/screenshots/game window.png" width=450> </p>
 <h3 align="center"> Game Window During Pawn Promotion (left) and Game Over (right) </h3>
-<p align="center"> <img src="chess/screenshots/game window pawn promotion.png" width=500> <img src="chess/screenshots/game over.png" width=500> </p>
+<p align="center"> <img src="chess/screenshots/game window pawn promotion.png" width=400> <img src="chess/screenshots/game over.png" width=400> </p>
 <h3 align="center"> Info Window </h3>
 <p align="center"> <img src="chess/screenshots/info window.png" width=500> </p>
 
 # Snake
 <h3 align="center"> Main Menu (left) amd Game Window (right) </h3>
-<p align="center"> <img src="snake/screenshots/main menu.png" width=500> <img src="snake/screenshots/game window.png" width=500> </p>
+<p align="center"> <img src="snake/screenshots/main menu.png" width=350> <img src="snake/screenshots/game window.png" width=350> </p>
 <h3 align="center"> Game Over (left) and Info Window (right) </h3>
-<p align="center"> <img src="snake/screenshots/game over.png" width=500> <img src="snake/screenshots/info window.png" width=500> </p>
+<p align="center"> <img src="snake/screenshots/game over.png" width=300> <img src="snake/screenshots/info window.png" width=300> </p>
 
 # Currency Converter
 <h3 align="center"> Main Window </h3>
