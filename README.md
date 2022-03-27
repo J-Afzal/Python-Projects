@@ -13,12 +13,12 @@ pyinstaller build.spec
 
 # Project List
 Using Pygame:
-    * Chess
-    * Snake
+* Chess
+* Snake
 
 Using Tkinter
-    * Currency Converter
-    * Calculator
+* Currency Converter
+* Calculator
 
 # Chess
 <h3 align="center"> Main Menu (left) and Game Window (right) </h3>
