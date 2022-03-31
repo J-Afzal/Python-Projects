@@ -1,13 +1,14 @@
 import PyInstaller.config
-PyInstaller.config.CONF['distpath'] = '.'
+PyInstaller.config.CONF['workpath'] = './build'
+PyInstaller.config.CONF['distpath'] = './dist'
 
 ##############################################################################################################################
 
 
-chessAnalysis = Analysis(['..\\chess\\main.py', '..\\chess\\chess_game.py'],
+chessAnalysis = Analysis(['../chess/main.py', '../chess/chess_game.py'],
                          pathex=[],
                          binaries=[],
-                         datas=[('..\\chess\\resources\\*.*', '.')],
+                         datas=[('../chess/resources/*.*', '.')],
                          hiddenimports=[],
                          hookspath=[],
                          hooksconfig={},
@@ -38,15 +39,15 @@ chessEXE = EXE(chessPYZ,
                target_arch=None,
                codesign_identity=None,
                entitlements_file=None,
-               icon='..\\chess\\resources\\app.ico')
+               icon='../chess/resources/app.ico')
 
 ##############################################################################################################################
 
 
-snakeAnalysis = Analysis(['..\\snake\\main.py', '..\\snake\\snake.py'],
+snakeAnalysis = Analysis(['../snake/main.py', '../snake/snake.py'],
                          pathex=[],
                          binaries=[],
-                         datas=[('..\\snake\\resources\\*.*', '.')],
+                         datas=[('../snake/resources/*.*', '.')],
                          hiddenimports=[],
                          hookspath=[],
                          hooksconfig={},
@@ -77,16 +78,16 @@ snakeEXE = EXE(snakePYZ,
                target_arch=None,
                codesign_identity=None,
                entitlements_file=None,
-               icon='..\\snake\\resources\\app.ico')
+               icon='../snake/resources/app.ico')
 
 ##############################################################################################################################
 
-currencyConverterAnalysis = Analysis(['..\\currency converter\\main.py', '..\\currency converter\\currency_converter.py'],
+currencyConverterAnalysis = Analysis(['../currency converter/main.py', '../currency converter/currency_converter.py'],
                                      pathex=[],
                                      binaries=[],
-                                     datas=[('..\\currency converter\\resources\\*.*', '.'),
-                                            ('..\\currency converter\\resources\\theme\\sun-valley.tcl', 'theme'),
-                                            ('..\\currency converter\\resources\\theme\\sun-valley', 'theme\\sun-valley')],
+                                     datas=[('../currency converter/resources/*.*', '.'),
+                                            ('../currency converter/resources/theme/sun-valley.tcl', 'theme'),
+                                            ('../currency converter/resources/theme/sun-valley', 'theme/sun-valley')],
                                      hiddenimports=[],
                                      hookspath=[],
                                      hooksconfig={},
@@ -117,17 +118,17 @@ currencyConverterEXE = EXE(currencyConverterPYZ,
                            target_arch=None,
                            codesign_identity=None,
                            entitlements_file=None,
-                           icon='..\\currency converter\\resources\\app.ico')
+                           icon='../currency converter/resources/app.ico')
 
 ##############################################################################################################################
 
 
-calculatorAnalysis = Analysis(['..\\calculator\\main.py', '..\\calculator\\calculator.py'],
+calculatorAnalysis = Analysis(['../calculator/main.py', '../calculator/calculator.py'],
                               pathex=[],
                               binaries=[],
-                              datas=[('..\\calculator\\resources\\*.*', '.'),
-                                     ('..\\calculator\\resources\\theme\\forest-dark.tcl', 'theme'),
-                                     ('..\\calculator\\resources\\theme\\forest-dark', 'theme\\forest-dark')],
+                              datas=[('../calculator/resources/*.*', '.'),
+                                     ('../calculator/resources/theme/forest-dark.tcl', 'theme'),
+                                     ('../calculator/resources/theme/forest-dark', 'theme/forest-dark')],
                               hiddenimports=[],
                               hookspath=[],
                               hooksconfig={},
@@ -158,4 +159,4 @@ calculatorEXE = EXE(calculatorPYZ,
                     target_arch=None,
                     codesign_identity=None,
                     entitlements_file=None,
-                    icon='..\\calculator\\resources\\app.ico')
+                    icon='../calculator/resources/app.ico')
