@@ -22,9 +22,10 @@ class App:
         self.output_text = None
 
         # Constants
-        self.INPUT_FONT = ('Segoe UI', 32, 'normal')
-        self.OUTPUT_FONT = ('Segoe UI', 64, 'normal')
-        self.INFO_FONT = ('Segoe UI', 12, 'normal')
+        self.FONT = 'Segoe UI'
+        self.INPUT_FONT = (self.FONT, 32, 'normal')
+        self.OUTPUT_FONT = (self.FONT, 64, 'normal')
+        self.INFO_FONT = (self.FONT, 12, 'normal')
 
         self.PAD = 5
         self.EXTRA_PAD = 15
