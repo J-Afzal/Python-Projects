@@ -31,14 +31,15 @@ class App:
         self.result_four = None
 
         # Constants
-        self.LABEL_FONT = ('Segoe UI', 10, 'bold')
-        self.WIDGET_FONT = ('Segoe UI', 14, 'normal')
-        self.RESULTS_ONE_FONT = ('Segoe UI', 16, 'normal')
-        self.RESULTS_TWO_FONT = ('Segoe UI', 18, 'bold')
-        self.RESULTS_THREE_FONT = ('Segoe UI', 12, 'normal')
-        self.RESULTS_FOUR_FONT = ('Segoe UI', 12, 'normal')
-        self.UPDATE_WINDOW_FONT = ('Segoe UI', 12, 'normal')
-        self.INFO_WINDOW_FONT = ('Segoe UI', 12, 'normal')
+        self.FONT = 'Segoe UI'
+        self.LABEL_FONT = (self.FONT, 10, 'bold')
+        self.WIDGET_FONT = (self.FONT, 14, 'normal')
+        self.RESULTS_ONE_FONT = (self.FONT, 16, 'normal')
+        self.RESULTS_TWO_FONT = (self.FONT, 18, 'bold')
+        self.RESULTS_THREE_FONT = (self.FONT, 12, 'normal')
+        self.RESULTS_FOUR_FONT = (self.FONT, 12, 'normal')
+        self.UPDATE_WINDOW_FONT = (self.FONT, 12, 'normal')
+        self.INFO_WINDOW_FONT = (self.FONT, 12, 'normal')
 
         self.FRAME_PAD = 10
         self.WIDGET_PAD = 10
