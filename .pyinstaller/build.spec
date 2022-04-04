@@ -2,8 +2,7 @@ import PyInstaller.config
 PyInstaller.config.CONF['workpath'] = './build'
 PyInstaller.config.CONF['distpath'] = './dist'
 
-##############################################################################################################################
-
+################################################################ CHESS ################################################################
 
 chessAnalysis = Analysis(['../chess/main.py', '../chess/chess_game.py'],
                          pathex=[],
@@ -41,8 +40,7 @@ chessEXE = EXE(chessPYZ,
                entitlements_file=None,
                icon='../chess/resources/app.ico')
 
-##############################################################################################################################
-
+################################################################ SNAKE ################################################################
 
 snakeAnalysis = Analysis(['../snake/main.py', '../snake/snake.py'],
                          pathex=[],
@@ -80,7 +78,7 @@ snakeEXE = EXE(snakePYZ,
                entitlements_file=None,
                icon='../snake/resources/app.ico')
 
-##############################################################################################################################
+################################################################ CURRENCY CONVERTER ################################################################
 
 currencyConverterAnalysis = Analysis(['../currency converter/main.py', '../currency converter/currency_converter.py'],
                                      pathex=[],
@@ -120,8 +118,7 @@ currencyConverterEXE = EXE(currencyConverterPYZ,
                            entitlements_file=None,
                            icon='../currency converter/resources/app.ico')
 
-##############################################################################################################################
-
+################################################################ CALCULATOR ################################################################
 
 calculatorAnalysis = Analysis(['../calculator/main.py', '../calculator/calculator.py'],
                               pathex=[],

@@ -25,10 +25,10 @@ class App:
         self.prev_base_curr_symbol = None
         self.base_currency = None
         self.dest_currency = None
-        self.result_one = None
-        self.result_two = None
-        self.result_three = None
-        self.result_four = None
+        self.input_amount_text = None
+        self.output_amount_text = None
+        self.conversion_rate_text = None
+        self.last_updated_text = None
 
         # Constants
         self.FONT = 'Segoe UI'
@@ -63,6 +63,12 @@ class App:
         # Main loop
         self.root.mainloop()
 
+    def get_path(self, file_name):
+        try:
+            return os.path.join(sys._MEIPASS, file_name)
+        except AttributeError:
+            return 'currency converter\\resources\\' + file_name
+
     def create_main_window(self):
         self.root.title('Currency Converter')
         self.root.geometry(f'1092x278+{int(self.root.winfo_screenwidth() / 2 - 1092 / 2)}+'f'{int(self.root.winfo_screenheight() / 2 - 278 / 2)}')
@@ -75,10 +81,10 @@ class App:
         self.prev_base_curr_symbol = "£"
         self.base_currency = tkinter.StringVar(value='GBP — British Pound')
         self.dest_currency = tkinter.StringVar(value='USD — United States Dollar')
-        self.result_one = tkinter.StringVar(value="")
-        self.result_two = tkinter.StringVar(value="")
-        self.result_three = tkinter.StringVar(value="")
-        self.result_four = tkinter.StringVar(value="")
+        self.input_amount_text = tkinter.StringVar(value="")
+        self.output_amount_text = tkinter.StringVar(value="")
+        self.conversion_rate_text = tkinter.StringVar(value="")
+        self.last_updated_text = tkinter.StringVar(value="")
 
         self.amount_trace = self.amount.trace_add('write', self.update_conversion)
         self.root.bind('<<ComboboxSelected>>', self.update_conversion)
@@ -106,10 +112,10 @@ class App:
 
         output_frame = tkinter.ttk.Frame(self.root, padding=self.FRAME_PAD)
         output_frame.grid(column=0, row=1)
-        tkinter.ttk.Label(output_frame, textvariable=self.result_one, font=self.RESULTS_ONE_FONT).grid(column=0, row=0)
-        tkinter.ttk.Label(output_frame, textvariable=self.result_two, font=self.RESULTS_TWO_FONT).grid(column=0, row=1, pady=5)
-        tkinter.ttk.Label(output_frame, textvariable=self.result_three, font=self.RESULTS_THREE_FONT).grid(column=0, row=2, pady=5)
-        tkinter.ttk.Label(output_frame, textvariable=self.result_four, font=self.RESULTS_FOUR_FONT).grid(column=0, row=3)
+        tkinter.ttk.Label(output_frame, textvariable=self.input_amount_text, font=self.RESULTS_ONE_FONT).grid(column=0, row=0)
+        tkinter.ttk.Label(output_frame, textvariable=self.output_amount_text, font=self.RESULTS_TWO_FONT).grid(column=0, row=1, pady=5)
+        tkinter.ttk.Label(output_frame, textvariable=self.conversion_rate_text, font=self.RESULTS_THREE_FONT).grid(column=0, row=2, pady=5)
+        tkinter.ttk.Label(output_frame, textvariable=self.last_updated_text, font=self.RESULTS_FOUR_FONT).grid(column=0, row=3)
 
         bottom_frame = tkinter.ttk.Frame(self.root, padding=self.FRAME_PAD)
         bottom_frame.grid(column=0, row=2)
@@ -117,19 +123,13 @@ class App:
         tkinter.ttk.Button(bottom_frame, image=self.INFO_BUTTON_IMAGE, command=self.display_info_window).grid(column=1, row=0, padx=self.BUTTON_PAD)
         tkinter.ttk.Button(bottom_frame, image=self.COPY_BUTTON_IMG, command=self.copy_to_clipboard).grid(column=2, row=0, padx=self.BUTTON_PAD)
 
-    def get_path(self, file_name):
-        try:
-            return os.path.join(sys._MEIPASS, file_name)
-        except AttributeError:
-            return 'currency converter\\resources\\' + file_name
-
     def focus_on_entry(self, event=None):
         self.amount_entry.focus()
         self.amount_entry.icursor(len(self.base_currency.get()))
 
     def copy_to_clipboard(self, event=None):
         self.root.clipboard_clear()
-        self.root.clipboard_append(self.result_two.get())
+        self.root.clipboard_append(self.output_amount_text.get())
 
     def swap_currencies(self, event=None):
         new_base = self.dest_currency.get()
@@ -166,7 +166,7 @@ class App:
                 curr_amount = float(curr_amount)
             else:
                 curr_amount = 1
-        except ValueError:  # if curr_amount has no decimal point
+        except ValueError:  # if curr_amount has decimal point
             try:
                 if float(curr_amount) < self.MAX_NUMBER_ALLOWED:
                     self.amount.set(f'{base_curr_symbol} {float(curr_amount):,.2f}')
@@ -179,7 +179,7 @@ class App:
         # The trace is added back
         self.amount_trace = self.amount.trace_add('write', self.update_conversion)
 
-        # This block is to cover to unusual situation where ILS (Israeli Shekel) has conversion rates for
+        # This block is to cover the unusual situation where ILS (Israeli Shekel) has conversion rates for
         # all required currencies but all required currencies do not have a conversion rate for ILS.
         # Thus, for this case just take the inverse, or 0 if neither conversion exists.
         try:
@@ -190,10 +190,10 @@ class App:
             except KeyError:
                 conversion_rate = 0
 
-        self.result_one.set(f'{curr_amount:,.2f} {base_curr_name} = ')
-        self.result_two.set(f'{curr_amount * conversion_rate:,.5f} {dest_curr_name}')
-        self.result_three.set(f'1 {base_curr_code} = {conversion_rate:,.5f} {dest_curr_code}')
-        self.result_four.set(f'(Last updated at {self.forex_data["update_date"]})')
+        self.input_amount_text.set(f'{curr_amount:,.2f} {base_curr_name} = ')
+        self.output_amount_text.set(f'{curr_amount * conversion_rate:,.5f} {dest_curr_name}')
+        self.conversion_rate_text.set(f'1 {base_curr_code} = {conversion_rate:,.5f} {dest_curr_code}')
+        self.last_updated_text.set(f'(Last updated at {self.forex_data["update_date"]})')
 
     def update_forex_data(self):
         self.root.withdraw()

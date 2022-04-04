@@ -74,6 +74,12 @@ class App:
         # Main loop
         self.root.mainloop()
 
+    def get_path(self, file_name):
+        try:
+            return os.path.join(sys._MEIPASS, file_name)
+        except AttributeError:
+            return 'calculator\\resources\\' + file_name
+
     def create_main_window(self):
         self.root.title('Calculator')
         self.root.geometry(f'856x834+{int(self.root.winfo_screenwidth() / 2 - 834 / 2)}+{int(self.root.winfo_screenheight() / 2 - 830 / 2)}')
@@ -147,12 +153,6 @@ class App:
         ttk.Button(main_frame, image=self.PI, command=self.pi_pressed).grid(column=3, row=3, padx=(self.EXTRA_PAD, self.PAD), pady=(self.EXTRA_PAD, self.PAD))
         ttk.Button(main_frame, image=self.TAU, command=self.tau_pressed).grid(column=4, row=3, padx=self.PAD, pady=(self.EXTRA_PAD, self.PAD))
         ttk.Button(main_frame, image=self.GOLDEN_RATIO, command=self.golden_ration_pressed).grid(column=5, row=3, padx=self.PAD, pady=(self.EXTRA_PAD, self.PAD))
-
-    def get_path(self, file_name):
-        try:
-            return os.path.join(sys._MEIPASS, file_name)
-        except AttributeError:
-            return 'calculator\\resources\\' + file_name
 
     def focus_on_input(self, event=None, cursor_pos=None, scroll_value=None):
         self.input_entry.focus()
