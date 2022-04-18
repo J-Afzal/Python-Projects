@@ -1,7 +1,7 @@
 # About
 An assortment of projects that I undertook in order to learn Python
 
-# Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
+# Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/workflows/PyInstaller/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
 To install all the dependencies use the following command in the root directory:
 ```commandline
 pip install -r requirements.txt
