@@ -1,17 +1,3 @@
-# About
-An assortment of projects that I undertook in order to learn Python
-
-# Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/workflows/PyInstaller/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
-To install all the dependencies use the following command in the root directory:
-```commandline
-pip install -r requirements.txt
-```
-To compile each project in to a single .exe file using the following command in the ```.pyinstaller``` directory:
-```commandline
-pyinstaller build.spec
-```
-The .exe files should be located in ```.pyinstaller/dist/```
- 
 # Project List
 Using Pygame:
 * Chess
@@ -44,3 +30,17 @@ Using Tkinter
 # Calculator
 <h3 align="center"> Main Window (left) and Info Window (right) </h3>
 <p align="center"> <img src="calculator/screenshots/main window.png" height=500> <img src="calculator/screenshots/info window.png" height=500> </p>
+
+# About
+An assortment of projects that I undertook in order to learn Python
+
+# Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/workflows/PyInstaller/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
+To install all the dependencies use the following command in the root directory:
+```commandline
+pip install -r requirements.txt
+```
+To compile each project in to a single .exe file using the following command in the ```.pyinstaller``` directory:
+```commandline
+pyinstaller build.spec
+```
+The .exe files should be located in ```.pyinstaller/dist/```
