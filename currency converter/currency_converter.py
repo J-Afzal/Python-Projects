@@ -102,12 +102,12 @@ class App:
         self.amount_entry = tkinter.ttk.Entry(input_frame, textvariable=self.amount, font=self.WIDGET_FONT, justify=tkinter.LEFT, width=self.ENTRY_WIDTH)
         self.amount_entry.grid(column=0, row=1, padx=self.WIDGET_PAD)
 
-        tkinter.ttk.Label(input_frame, text='From' + 71 * ' ', font=self.LABEL_FONT).grid(column=1, row=0)
+        tkinter.ttk.Label(input_frame, text='From' + 81 * ' ', font=self.LABEL_FONT).grid(column=1, row=0)
         tkinter.ttk.Combobox(input_frame, textvariable=self.base_currency, font=self.WIDGET_FONT, justify=tkinter.LEFT, width=self.COMBO_BOX_WIDTH, state='readonly', values=self.forex_data['currency_names']).grid(column=1, row=1, padx=self.WIDGET_PAD)
 
         tkinter.ttk.Button(input_frame, image=self.SWAP_BUTTON_IMG, command=self.swap_currencies).grid(column=2, row=1)
 
-        tkinter.ttk.Label(input_frame, text='To' + 75 * ' ', font=self.LABEL_FONT).grid(column=3, row=0)
+        tkinter.ttk.Label(input_frame, text='To' + 85 * ' ', font=self.LABEL_FONT).grid(column=3, row=0)
         tkinter.ttk.Combobox(input_frame, textvariable=self.dest_currency, font=self.WIDGET_FONT, justify=tkinter.LEFT, width=self.COMBO_BOX_WIDTH, state='readonly', values=self.forex_data['currency_names']).grid(column=3, row=1, padx=self.WIDGET_PAD)
 
         output_frame = tkinter.ttk.Frame(self.root, padding=self.FRAME_PAD)
