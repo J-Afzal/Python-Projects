@@ -1,4 +1,4 @@
-<p align="center"> <img src="screenshots/chess.gif" height=400>  <img src="screenshots/snake.gif" height=400> </p>
+<p align="center"> <img src="screenshots/chess.gif" height=400> <img src="screenshots/snake.gif" height=400> </p>
 <p align="center"> <img src="screenshots/currency_converter.gif"> </p>
 <p align="center"> <img src="screenshots/calculator.gif" width=400> </p>
 
