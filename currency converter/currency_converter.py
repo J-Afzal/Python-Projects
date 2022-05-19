@@ -4,7 +4,6 @@ import os
 import sys
 import tkinter
 import tkinter.ttk
-
 import forex_python.converter
 
 
