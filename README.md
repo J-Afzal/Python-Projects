@@ -15,11 +15,11 @@ Using Tkinter
 
 # Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/workflows/PyInstaller/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
 To install all the dependencies use the following command in the root directory:
-```commandline
+```
 pip install -r requirements.txt
 ```
 To compile each project into a single .exe file using the following command in the `.pyinstaller` directory:
-```commandline
+```
 pyinstaller build.spec
 ```
 The .exe files should be located in `.pyinstaller/dist/`
