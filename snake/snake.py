@@ -5,7 +5,7 @@ import random
 import pygame
 
 
-class App:
+class Snake:
     def __init__(self):
         pygame.init()
 

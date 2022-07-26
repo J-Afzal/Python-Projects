@@ -1,9 +1,5 @@
-import chess_game
-
-
-def main():
-    chess_game.App()
+from chess_game import Chess
 
 
 if __name__ == "__main__":
-    main()
+    Chess()

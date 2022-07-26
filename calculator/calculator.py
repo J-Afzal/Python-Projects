@@ -5,7 +5,7 @@ import sys
 import math
 
 
-class App:
+class Calculator:
     def __init__(self):
         # Variables
         self.current_answer = '0'

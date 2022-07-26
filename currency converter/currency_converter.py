@@ -7,7 +7,7 @@ import tkinter.ttk
 import forex_python.converter
 
 
-class App:
+class CurrencyConverter:
     def __init__(self):
         # Variables
         with open(self.get_path('forex data.json'), 'r', encoding='utf8') as f:

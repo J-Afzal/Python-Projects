@@ -1,9 +1,5 @@
-import currency_converter
-
-
-def main():
-    currency_converter.App()
+from currency_converter import CurrencyConverter
 
 
 if __name__ == '__main__':
-    main()
+    CurrencyConverter()

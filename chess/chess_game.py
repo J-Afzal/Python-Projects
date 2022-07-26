@@ -6,7 +6,7 @@ import pygame
 import chess
 
 
-class App:
+class Chess:
     def __init__(self):
         pygame.init()
 

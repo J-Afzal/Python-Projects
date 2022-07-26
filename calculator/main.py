@@ -1,9 +1,5 @@
-import calculator
-
-
-def main():
-    calculator.App()
+from calculator import Calculator
 
 
 if __name__ == "__main__":
-    main()
+    Calculator()

@@ -1,9 +1,5 @@
-import snake
-
-
-def main():
-    snake.App()
+from snake import Snake
 
 
 if __name__ == "__main__":
-    main()
+    Snake()
