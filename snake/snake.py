@@ -67,6 +67,9 @@ class Snake:
 
         self.previous_mouse_position = (0, 0)
 
+        self.menu_selection_sound = pygame.mixer.Sound(self.get_path('menu selection.wav'))
+        self.eating_apple = pygame.mixer.Sound(self.get_path('eating apple.wav'))
+
         self.blank_window = self.create_blank_window()
         self.main_menu_menus = self.create_menus(["PLAY SNAKE", "MAP SIZE", "SNAKE SPEED", "NUMBER OF APPLES", "INFO", "QUIT"], 50, 50, 200, 100, self.MAIN_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 0, 5)
         self.map_size_menus = self.create_menus(["MAP SIZES", "10 x 10", "20 x 20", "40 x 40", "BACK TO MAIN MENU"], 50, 50, 300, 100, self.SUB_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 1, 4)
@@ -122,7 +125,7 @@ class Snake:
         try:
             return os.path.join(sys._MEIPASS, file_name)
         except AttributeError:
-            return 'chess\\resources\\' + file_name
+            return 'snake\\resources\\' + file_name
 
     def setup_game(self):
         self.snake_direction = "RIGHT"
@@ -186,10 +189,13 @@ class Snake:
                 if self.previous_mouse_position != pygame.mouse.get_pos():
                     for index, pos in enumerate(options_mouse_positions):
                         if pos[0] <= y <= pos[1]:
+                            if current_selection != index:
+                                self.menu_selection_sound.play()
                             current_selection = index
                             break
 
                 if (event.type == pygame.MOUSEBUTTONUP and event.button == 1) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+                    self.menu_selection_sound.play()
                     return options[current_selection]
 
             if self.game_is_over:
@@ -305,6 +311,7 @@ class Snake:
     def check_for_apple(self):
         for apple in self.apple_positions:
             if self.snake_points_x[0] == apple[0] and self.snake_points_y[0] == apple[1]:
+                self.eating_apple.play()
                 self.snake_points_x.append(self.snake_points_x[-1])
                 self.snake_points_y.append(self.snake_points_y[-1])
                 self.apple_positions.pop(self.apple_positions.index(apple))
