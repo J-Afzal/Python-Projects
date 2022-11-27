@@ -1,5 +1,4 @@
 import datetime
-import json
 import os
 import sys
 import tkinter
@@ -10,8 +9,212 @@ import forex_python.converter
 class CurrencyConverter:
     def __init__(self):
         # Variables
-        with open(self.get_path('forex data.json'), 'r', encoding='utf8') as f:
-            self.forex_data = json.load(f)
+        self.forex_data = {
+            "currency_names": [
+                "AUD \u2014 Australian Dollar",
+                "BGN \u2014 Bulgarian Lev",
+                "BRL \u2014 Brazilian Real",
+                "CAD \u2014 Canadian Dollar",
+                "CHF \u2014 Swiss Franc",
+                "CNY \u2014 Chinese/Yuan Renminbi",
+                "CZK \u2014 Czech Koruna",
+                "DKK \u2014 Danish Krone",
+                "EUR \u2014 European Euro",
+                "GBP \u2014 British Pound",
+                "HKD \u2014 Hong Kong Dollar",
+                "HRK \u2014 Croatian Kuna",
+                "HUF \u2014 Hungarian Forint",
+                "IDR \u2014 Indonesian Rupiah",
+                "ILS \u2014 Israeli New Sheqel",
+                "INR \u2014 Indian Rupee",
+                "ISK \u2014 Icelandic Kr\u00f3na",
+                "JPY \u2014 Japanese Yen",
+                "KRW \u2014 South Korean Won",
+                "MXN \u2014 Mexican Peso",
+                "MYR \u2014 Malaysian Ringgit",
+                "NOK \u2014 Norwegian Krone",
+                "NZD \u2014 New Zealand Dollar",
+                "PHP \u2014 Philippine Peso",
+                "PLN \u2014 Polish Zloty",
+                "RON \u2014 Romanian Leu",
+                "RUB \u2014 Russian Ruble",
+                "SEK \u2014 Swedish Krona",
+                "SGD \u2014 Singapore Dollar",
+                "THB \u2014 Thai Baht",
+                "TRY \u2014 Turkish New Lira",
+                "USD \u2014 United States Dollar",
+                "ZAR \u2014 South African Rand"
+            ],
+            "currency_details": {
+                "AUD \u2014 Australian Dollar": {
+                    "symbol": "$",
+                    "name": "Australian Dollar",
+                    "code": "AUD"
+                },
+                "BGN \u2014 Bulgarian Lev": {
+                    "symbol": "BGN",
+                    "name": "Bulgarian Lev",
+                    "code": "BGN"
+                },
+                "BRL \u2014 Brazilian Real": {
+                    "symbol": "R$",
+                    "name": "Brazilian Real",
+                    "code": "BRL"
+                },
+                "CAD \u2014 Canadian Dollar": {
+                    "symbol": "$",
+                    "name": "Canadian Dollar",
+                    "code": "CAD"
+                },
+                "CHF \u2014 Swiss Franc": {
+                    "symbol": "Fr.",
+                    "name": "Swiss Franc",
+                    "code": "CHF"
+                },
+                "CNY \u2014 Chinese/Yuan Renminbi": {
+                    "symbol": "\u00a5",
+                    "name": "Chinese/Yuan Renminbi",
+                    "code": "CNY"
+                },
+                "CZK \u2014 Czech Koruna": {
+                    "symbol": "K\u010d",
+                    "name": "Czech Koruna",
+                    "code": "CZK"
+                },
+                "DKK \u2014 Danish Krone": {
+                    "symbol": "Kr",
+                    "name": "Danish Krone",
+                    "code": "DKK"
+                },
+                "EUR \u2014 European Euro": {
+                    "symbol": "\u20ac",
+                    "name": "European Euro",
+                    "code": "EUR"
+                },
+                "GBP \u2014 British Pound": {
+                    "symbol": "\u00a3",
+                    "name": "British Pound",
+                    "code": "GBP"
+                },
+                "HKD \u2014 Hong Kong Dollar": {
+                    "symbol": "HK$",
+                    "name": "Hong Kong Dollar",
+                    "code": "HKD"
+                },
+                "HRK \u2014 Croatian Kuna": {
+                    "symbol": "kn",
+                    "name": "Croatian Kuna",
+                    "code": "HRK"
+                },
+                "HUF \u2014 Hungarian Forint": {
+                    "symbol": "Ft",
+                    "name": "Hungarian Forint",
+                    "code": "HUF"
+                },
+                "IDR \u2014 Indonesian Rupiah": {
+                    "symbol": "Rp",
+                    "name": "Indonesian Rupiah",
+                    "code": "IDR"
+                },
+                "ILS \u2014 Israeli New Sheqel": {
+                    "symbol": "\u20aa",
+                    "name": "Israeli New Sheqel",
+                    "code": "ILS"
+                },
+                "INR \u2014 Indian Rupee": {
+                    "symbol": "\u20b9",
+                    "name": "Indian Rupee",
+                    "code": "INR"
+                },
+                "ISK \u2014 Icelandic Kr\u00f3na": {
+                    "symbol": "kr",
+                    "name": "Icelandic Kr\u00f3na",
+                    "code": "ISK"
+                },
+                "JPY \u2014 Japanese Yen": {
+                    "symbol": "\u00a5",
+                    "name": "Japanese Yen",
+                    "code": "JPY"
+                },
+                "KRW \u2014 South Korean Won": {
+                    "symbol": "W",
+                    "name": "South Korean Won",
+                    "code": "KRW"
+                },
+                "MXN \u2014 Mexican Peso": {
+                    "symbol": "$",
+                    "name": "Mexican Peso",
+                    "code": "MXN"
+                },
+                "MYR \u2014 Malaysian Ringgit": {
+                    "symbol": "RM",
+                    "name": "Malaysian Ringgit",
+                    "code": "MYR"
+                },
+                "NOK \u2014 Norwegian Krone": {
+                    "symbol": "kr",
+                    "name": "Norwegian Krone",
+                    "code": "NOK"
+                },
+                "NZD \u2014 New Zealand Dollar": {
+                    "symbol": "NZ$",
+                    "name": "New Zealand Dollar",
+                    "code": "NZD"
+                },
+                "PHP \u2014 Philippine Peso": {
+                    "symbol": "\u20b1",
+                    "name": "Philippine Peso",
+                    "code": "PHP"
+                },
+                "PLN \u2014 Polish Zloty": {
+                    "symbol": "z\u0142",
+                    "name": "Polish Zloty",
+                    "code": "PLN"
+                },
+                "RON \u2014 Romanian Leu": {
+                    "symbol": "L",
+                    "name": "Romanian Leu",
+                    "code": "RON"
+                },
+                "RUB \u2014 Russian Ruble": {
+                    "symbol": "\u20bd",
+                    "name": "Russian Ruble",
+                    "code": "RUB"
+                },
+                "SEK \u2014 Swedish Krona": {
+                    "symbol": "kr",
+                    "name": "Swedish Krona",
+                    "code": "SEK"
+                },
+                "SGD \u2014 Singapore Dollar": {
+                    "symbol": "S$",
+                    "name": "Singapore Dollar",
+                    "code": "SGD"
+                },
+                "THB \u2014 Thai Baht": {
+                    "symbol": "\u0e3f",
+                    "name": "Thai Baht",
+                    "code": "THB"
+                },
+                "TRY \u2014 Turkish New Lira": {
+                    "symbol": "TRY",
+                    "name": "Turkish New Lira",
+                    "code": "TRY"
+                },
+                "USD \u2014 United States Dollar": {
+                    "symbol": "$",
+                    "name": "United States Dollar",
+                    "code": "USD"
+                },
+                "ZAR \u2014 South African Rand": {
+                    "symbol": "R",
+                    "name": "South African Rand",
+                    "code": "ZAR"
+                }
+            },
+            "currency_rates": {},
+            "update_date": ""
+        }
 
         self.root = tkinter.Tk()
         self.info_window = None
@@ -56,8 +259,7 @@ class CurrencyConverter:
 
         # Setup functions
         self.create_main_window()
-        self.focus_on_entry()
-        self.update_conversion()
+        self.root.after(1, lambda: self.update_forex_data())
 
         # Main loop
         self.root.mainloop()
@@ -129,6 +331,7 @@ class CurrencyConverter:
     def copy_to_clipboard(self, event=None):
         self.root.clipboard_clear()
         self.root.clipboard_append(self.output_amount_text.get())
+        self.focus_on_entry()
 
     def swap_currencies(self, event=None):
         new_base = self.dest_currency.get()
@@ -137,6 +340,7 @@ class CurrencyConverter:
         self.dest_currency.set(new_destination)
         # Replace old currency code with new one - also amount.set() triggers its trace write, thus updateConversion() is automatically called
         self.amount.set(self.amount.get().replace(self.forex_data['currency_details'][new_destination]['symbol'], self.forex_data['currency_details'][new_base]['symbol']))
+        self.focus_on_entry()
 
     def update_conversion(self, one=None, two=None, three=None):
         # The trace has to be removed so that it is not triggered again when using amount.set().
@@ -200,20 +404,18 @@ class CurrencyConverter:
 
         forex_rates = forex_python.converter.CurrencyRates()
 
-        for currency in self.forex_data['currency_names']:
-            self.forex_data['currency_rates'][currency] = forex_rates.get_rates(self.forex_data['currency_details'][currency]['code'])
-            self.forex_data['currency_rates'][currency][self.forex_data['currency_details'][currency]['code']] = 1
-            self.update_progress_bar.step(3)
-            self.root.update()
-
         self.forex_data['update_date'] = datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')
 
-        with open(self.get_path('forex data.json'), 'w', encoding="utf8") as f:
-            json.dump(self.forex_data, f, indent=2)
+        for currency in self.forex_data['currency_names']:
+            self.forex_data['currency_rates'][currency] = forex_rates.get_rates(self.forex_data["currency_details"][currency]['code'])
+            self.forex_data['currency_rates'][currency][self.forex_data["currency_details"][currency]['code']] = 1
+            self.update_progress_bar.step(3)
+            self.root.update()
 
         self.update_conversion()
         self.update_window.destroy()
         self.root.deiconify()
+        self.focus_on_entry()
 
     def create_update_window(self):
         self.update_window = tkinter.Toplevel(self.root)
@@ -279,6 +481,7 @@ class CurrencyConverter:
     def quit_info_window(self, event=None):
         self.info_window.destroy()
         self.root.deiconify()
+        self.focus_on_entry()
 
     def quit(self, event=None):
         self.root.quit()
