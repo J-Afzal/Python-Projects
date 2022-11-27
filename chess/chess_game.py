@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import math
 import random
 import pygame
 import chess
@@ -80,6 +81,7 @@ class Chess:
         self.mouse_button_down = None
         self.previous_mouse_position = (0, 0)
 
+        self.menu_selection_sound = pygame.mixer.Sound(self.get_path('menu selection.wav'))
         self.start_sound = pygame.mixer.Sound(self.get_path('start.wav'))
         self.move_sound = pygame.mixer.Sound(self.get_path('move.wav'))
         self.castling_sound = pygame.mixer.Sound(self.get_path('castling.wav'))
@@ -226,10 +228,13 @@ class Chess:
                 if self.previous_mouse_position != pygame.mouse.get_pos():
                     for index, pos in enumerate(options_mouse_positions):
                         if pos[0] <= y <= pos[1]:
+                            if current_selection != index:
+                                self.menu_selection_sound.play()
                             current_selection = index
                             break
 
                 if (event.type == pygame.MOUSEBUTTONUP and event.button == 1) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+                    self.menu_selection_sound.play()
                     return options[current_selection]
 
             if self.game_is_over:
@@ -297,7 +302,7 @@ class Chess:
 
             self.window.blit(temp_surface, (0, 0))
             mouse_pos = pygame.mouse.get_pos()
-            self.window.blit(self.piece_pngs[self.selected_piece], (mouse_pos[0] - self.PIECE_SIZE / 2, mouse_pos[1] - self.PIECE_SIZE / 2))
+            self.window.blit(self.piece_pngs[self.selected_piece.symbol()], (mouse_pos[0] - self.PIECE_SIZE / 2, mouse_pos[1] - self.PIECE_SIZE / 2))
 
         pygame.display.update()
 
@@ -317,7 +322,8 @@ class Chess:
                         self.go_to_main_menu = True
                         return
                 elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    self.selected_piece, self.selected_piece_grid_pos = self.get_selected_piece_and_pos()
+                    self.selected_piece_grid_pos = self.get_grid_pos_from_coords(pygame.mouse.get_pos())
+                    self.selected_piece = self.chess_board.piece_at(self.selected_piece_grid_pos)
                     self.mouse_button_down = True
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     self.new_grid_pos = self.get_grid_pos_from_coords(pygame.mouse.get_pos())
@@ -330,19 +336,6 @@ class Chess:
 
             self.display_board()
             pygame.display.update()
-
-    def get_selected_piece_and_pos(self):
-        piece_grid_pos = self.get_grid_pos_from_coords(pygame.mouse.get_pos())
-        piece = self.chess_board.piece_at(piece_grid_pos)
-        if piece is None:
-            piece_symbol = None
-        else:
-            if piece.color == self.chess_board.turn:
-                piece_symbol = piece.symbol()
-            else:
-                piece_symbol = None
-
-        return piece_symbol, piece_grid_pos,
 
     def get_next_move_from_ai(self):
         for event in pygame.event.get():
@@ -371,7 +364,7 @@ class Chess:
         except ValueError:  # Illegal move
             return False
 
-        if (self.selected_piece == 'P' and int(self.new_grid_pos / 8) == 7) or (self.selected_piece == 'p' and int(self.new_grid_pos / 8) == 0):
+        if (self.selected_piece.symbol() == 'P' and math.floor(self.new_grid_pos / 8) == 7) or (self.selected_piece.symbol() == 'p' and math.floor(self.new_grid_pos / 8) == 0):
             next_move = chess.Move(self.selected_piece_grid_pos, self.new_grid_pos, self.get_pawn_promotion_choice(self.new_grid_pos, current_turn_is_ai))
 
             if self.ai_sleep_duration != 0 or self.number_of_players > 0:
