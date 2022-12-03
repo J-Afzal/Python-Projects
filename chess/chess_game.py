@@ -1,10 +1,10 @@
 import os
 import sys
-import time
 import math
-import random
+
 import pygame
 import chess
+import chess.engine
 
 
 class Chess:
@@ -39,6 +39,7 @@ class Chess:
 
         self.TEXT_COLOUR = (255, 255, 255)
         self.SELECTED_TEXT_COLOUR = (0, 156, 128)
+        self.CURRENT_OPTION_COLOUR = (128, 156, 0)
 
         self.FONT = 'Video Game Font'
         self.MAIN_MENU_TITLE_FONT = pygame.font.SysFont(self.FONT, 120)
@@ -59,9 +60,8 @@ class Chess:
         self.window = pygame.display.set_mode((self.WINDOW_SIZE, self.WINDOW_SIZE))
 
         self.number_of_players = 1
-        self.ai_sleep_duration = 1
-
         self.human_player = chess.WHITE
+        self.engine = chess.engine.SimpleEngine.popen_uci(self.get_path('stockfish.exe'))
         self.chess_board = None
         self.white_score = None
         self.black_score = None
@@ -116,9 +116,8 @@ class Chess:
         ]
 
         self.blank_board = self.create_blank_board()
-        self.main_menu_menus = self.create_menus(['PLAY CHESS', ' NO. OF PLAYERS', ' AI SPEED', ' INFO', ' QUIT'], 50, 50, 150, 100, self.MAIN_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 0, 4)
+        self.main_menu_menus = self.create_menus(['PLAY CHESS', ' NO. OF PLAYERS', ' INFO', ' QUIT'], 50, 50, 250, 100, self.MAIN_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 0, 4)
         self.number_of_players_menus = self.create_menus(['NO. OF PLAYERS', ' 0', ' 1', ' 2', ' BACK TO MAIN MENU'], 50, 50, 150, 100, self.SUB_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 1, 4)
-        self.ai_speed_menus = self.create_menus(['AI SPEED', ' 0', ' 1', ' 2', ' BACK TO MAIN MENU'], 50, 50, 150, 100, self.SUB_MENU_TITLE_FONT, self.MENU_OPTIONS_FONT, 1, 4)
         self.info_menus = self.create_info_menu()
         self.game_over_menus = self.create_game_over_menu()
 
@@ -180,7 +179,7 @@ class Chess:
     def display_main_menu(self):
         current_selection = 0
         while True:
-            current_selection = self.display_menu(self.main_menu_menus, [0, 1, 2, 3, 4], current_selection, [[50, 120], [250, 280], [350, 380], [450, 480], [550, 580]])
+            current_selection = self.display_menu(self.main_menu_menus, [0, 1, 2, 3], current_selection, [[50, 120], [350, 380], [450, 480], [550, 580]])
 
             if current_selection == 0:
                 self.white_score = 0
@@ -189,23 +188,19 @@ class Chess:
             elif current_selection == 1:
                 self.number_of_players = self.display_menu(self.number_of_players_menus, [0, 1, 2, self.number_of_players], self.number_of_players, [[245, 285], [345, 385], [445, 485], [545, 585]])
             elif current_selection == 2:
-                self.ai_sleep_duration = self.display_menu(self.ai_speed_menus, [0, 1, 2, self.ai_sleep_duration], self.ai_sleep_duration, [[245, 285], [345, 385], [445, 485], [545, 585]])
-            elif current_selection == 3:
                 self.display_menu(self.info_menus, [0], 0, [[545, 585]])
-            elif current_selection == 4:
+            elif current_selection == 3:
                 pygame.display.quit()
-                sys.exit()
+                self.engine.quit()
+                sys.exit(0)
 
     def display_menu(self, option_menus, options, current_value, options_mouse_positions):
-        current_selection = 0
-        for i, val in enumerate(options):
-            if val == current_value:
-                current_selection = i
-                break
+        current_selection = options.index(current_value)
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
+                    self.engine.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP or event.key == pygame.K_w:
@@ -294,7 +289,6 @@ class Chess:
 
             for move in list(self.chess_board.legal_moves):
                 if move.from_square == self.selected_piece_grid_pos:
-                    print(f"{self.chess_board.color_at(move.to_square)}   {self.chess_board.turn}")
                     if self.chess_board.color_at(move.to_square) is None:
                         pygame.draw.circle(temp_surface, self.LEGAL_MOVE_COLOUR, self.get_coords_from_grid_pos(move.to_square, self.SQUARE_SIZE / 2), self.LEGAL_MOVE_RADIUS)
                     elif self.chess_board.color_at(move.to_square) != self.chess_board.turn:
@@ -311,10 +305,12 @@ class Chess:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
+                    self.engine.quit()
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
                         pygame.display.quit()
+                        self.engine.quit()
                         sys.exit()
                     if event.key == pygame.K_BACKSPACE:
                         self.undo_move()
@@ -341,17 +337,19 @@ class Chess:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.display.quit()
+                self.engine.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
                     pygame.display.quit()
+                    self.engine.quit()
                     sys.exit()
                 if event.key == pygame.K_q:
                     self.go_to_main_menu = True
                     return
 
-        time.sleep(self.ai_sleep_duration)
-        next_move = random.choice(list(self.chess_board.legal_moves))
+        next_move = self.engine.play(self.chess_board, chess.engine.Limit(0)).move
+
         self.selected_piece = self.chess_board.piece_at(next_move.from_square)
         self.selected_piece_grid_pos = next_move.from_square
         self.new_grid_pos = next_move.to_square
@@ -366,32 +364,19 @@ class Chess:
 
         if (self.selected_piece.symbol() == 'P' and math.floor(self.new_grid_pos / 8) == 7) or (self.selected_piece.symbol() == 'p' and math.floor(self.new_grid_pos / 8) == 0):
             next_move = chess.Move(self.selected_piece_grid_pos, self.new_grid_pos, self.get_pawn_promotion_choice(self.new_grid_pos, current_turn_is_ai))
-
-            if self.ai_sleep_duration != 0 or self.number_of_players > 0:
-                if self.chess_board.gives_check(next_move):
-                    self.check_sound.play()
-                elif self.chess_board.is_castling(next_move):
-                    self.castling_sound.play()
-                elif self.chess_board.piece_at(self.new_grid_pos) is not None:
-                    self.capture_sound.play()
-                else:
-                    self.move_sound.play()
-
-            self.chess_board.push(next_move)
         else:
             next_move = chess.Move(self.selected_piece_grid_pos, self.new_grid_pos)
 
-            if self.ai_sleep_duration != 0 or self.number_of_players > 0:
-                if self.chess_board.gives_check(next_move):
-                    self.check_sound.play()
-                elif self.chess_board.is_castling(next_move):
-                    self.castling_sound.play()
-                elif self.chess_board.piece_at(self.new_grid_pos) is not None:
-                    self.capture_sound.play()
-                else:
-                    self.move_sound.play()
+        if self.chess_board.gives_check(next_move):
+            self.check_sound.play()
+        elif self.chess_board.is_castling(next_move):
+            self.castling_sound.play()
+        elif self.chess_board.piece_at(self.new_grid_pos) is not None:
+            self.capture_sound.play()
+        else:
+            self.move_sound.play()
 
-            self.chess_board.push(next_move)
+        self.chess_board.push(next_move)
 
         self.previous_moves_from.append(self.selected_piece_grid_pos)
         self.previous_moves_to.append(self.new_grid_pos)
@@ -410,7 +395,7 @@ class Chess:
 
     def get_pawn_promotion_choice(self, new_grid_pos, current_turn_is_ai):
         if current_turn_is_ai:
-            return random.choice([chess.QUEEN, chess.KNIGHT, chess.ROOK, chess.BISHOP])
+            return chess.QUEEN
 
         x = self.SQUARE_SIZE * (new_grid_pos % 8) + self.PIECE_PAD
         if self.chess_board.turn == chess.WHITE:
@@ -433,10 +418,12 @@ class Chess:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
+                    self.engine.quit()
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_CTRL:
                         pygame.display.quit()
+                        self.engine.quit()
                         sys.exit()
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     x = int(pygame.mouse.get_pos()[0] / self.SQUARE_SIZE)
