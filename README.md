@@ -5,10 +5,12 @@
 An assortment of projects that I undertook in order to learn Python:
 
 Using Pygame:
+
 * Chess
 * Snake
 
 Using Tkinter
+
 * Currency Converter
 * Calculator
 
@@ -34,24 +36,24 @@ Due to the use of StockFish as the chess engine for `Chess`, a terminal window w
 
 ## Chess GIF
 
-<p align="center"> 
-  <img src="screenshots/chess/chess.gif">
+<p align="center">
+  <img src="screenshots/chess.gif">
 </p>
 
 ## Snake GIF
 
-<p align="center"> 
-  <img src="screenshots/snake/snake.gif">
+<p align="center">
+  <img src="screenshots/snake.gif">
 </p>
 
 ## Currency Converter GIF
 
-<p align="center"> 
-  <img src="screenshots/currency converter/currency_converter.gif">
+<p align="center">
+  <img src="screenshots/currency_converter.gif">
 </p>
 
 ## Calculator GIF
 
-<p align="center"> 
-  <img src="screenshots/calculator/calculator.gif">
+<p align="center">
+  <img src="screenshots/calculator.gif">
 </p>
