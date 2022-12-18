@@ -32,7 +32,7 @@ The .exe files should be located in `.pyinstaller/dist/`
 
 ## Warning
 
-Due to the use of StockFish as the chess engine for `Chess`, a terminal window will pop up when running `Chess`.
+Due to the use of StockFish as the chess engine, a terminal window will pop up when running `Chess`.
 
 ## Chess GIF
 
