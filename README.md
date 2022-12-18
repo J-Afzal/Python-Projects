@@ -16,13 +16,25 @@ Using Tkinter
 
 ## Building [![PyInstaller](https://github.com/J-Afzal/Python-Projects/workflows/PyInstaller/badge.svg)](https://github.com/J-Afzal/Python-Projects/actions/workflows/pyinstaller.yml)
 
-To install all the dependencies use the following command in the root directory:
+Using the following commands, from the root directory, to build the dev environment:
+
+```cmd
+virtualenv env
+```
+
+```cmd
+env/Scripts/activate
+```
 
 ```cmd
 pip install -r requirements.txt
 ```
 
-To compile each project into a single .exe file using the following command in the `.pyinstaller` directory:
+To compile each project into a single .exe file using the following commands from the root directory:
+
+```cmd
+cd .\.pyinstaller\ 
+```
 
 ```cmd
 pyinstaller build.spec
